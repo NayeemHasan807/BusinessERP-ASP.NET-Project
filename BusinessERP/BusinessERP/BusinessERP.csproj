@@ -51,6 +51,8 @@
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -95,19 +97,128 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\CSS\Button.css" />
+    <Content Include="Content\CSS\DivBackground.css" />
+    <Content Include="Content\CSS\HorizontalNavBarStyle.css" />
+    <Content Include="Content\CSS\VerticalNavBarStyle.css" />
+    <Content Include="Content\CSS\Style.css" />
+    <Content Include="Content\Images\Home\view1.jpg" />
+    <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
+    <Content Include="Models\BusinessERPModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BusinessERPModel.edmx</DependentUpon>
+      <LastGenOutput>BusinessERPModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\BusinessERPModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BusinessERPModel.edmx</DependentUpon>
+      <LastGenOutput>BusinessERPModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BusinessERPModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BusinessERPModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BusinessERPModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BusinessERPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BusinessERPModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BusinessERPModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CompanyInvoice.cs">
+      <DependentUpon>BusinessERPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CompanyLineItem.cs">
+      <DependentUpon>BusinessERPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CompanyProduct.cs">
+      <DependentUpon>BusinessERPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>BusinessERPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerInvoice.cs">
+      <DependentUpon>BusinessERPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerLineItem.cs">
+      <DependentUpon>BusinessERPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CustomerText.cs">
+      <DependentUpon>BusinessERPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Employee.cs">
+      <DependentUpon>BusinessERPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmployeeText.cs">
+      <DependentUpon>BusinessERPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\JobCategory.cs">
+      <DependentUpon>BusinessERPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Notice.cs">
+      <DependentUpon>BusinessERPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RawMaterial.cs">
+      <DependentUpon>BusinessERPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RawMaterialUsesLog.cs">
+      <DependentUpon>BusinessERPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RegistrationRequest.cs">
+      <DependentUpon>BusinessERPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RequestToSupport.cs">
+      <DependentUpon>BusinessERPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SupplierLog.cs">
+      <DependentUpon>BusinessERPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SupplierSchedule.cs">
+      <DependentUpon>BusinessERPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>BusinessERPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Vendor.cs">
+      <DependentUpon>BusinessERPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VendorProduct.cs">
+      <DependentUpon>BusinessERPModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
+    <EntityDeploy Include="Models\BusinessERPModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BusinessERPModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\BusinessERPModel.edmx.diagram">
+      <DependentUpon>BusinessERPModel.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Registration.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -117,8 +228,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
+    <Folder Include="Content\JS\" />
+    <Folder Include="Content\ProfilePictures\" />
+    <Folder Include="Content\Reports\" />
+    <Folder Include="Models\ViewModels\" />
+    <Folder Include="Views\User\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

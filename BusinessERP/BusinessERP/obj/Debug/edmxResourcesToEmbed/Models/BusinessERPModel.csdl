@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BusinessERPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="CompanyInvoice">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+    </Key>
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="SubTotal" Type="Double" Nullable="false" />
+    <Property Name="TotalWithTax" Type="Double" Nullable="false" />
+    <Property Name="CreditCardType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CardNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="VendorUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmployeeUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CompanyProduct">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ShortDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LongDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UnitPrice" Type="Double" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="ProductPicture" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ManufacturingDate" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <EntityType Name="CustomerInvoice">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+    </Key>
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="SubTotal" Type="Double" Nullable="false" />
+    <Property Name="TotalWithTax" Type="Double" Nullable="false" />
+    <Property Name="CreditCardType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CardNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CustomerUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ProfilePicture" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CustomerText">
+    <Key>
+      <PropertyRef Name="TextId" />
+    </Key>
+    <Property Name="TextId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TextBody" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ReceiverUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SenderUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="JoiningDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ProfilePicture" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="JobId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="JobCategory" Relationship="Self.FK_Employees_JobCategories" FromRole="Employees" ToRole="JobCategories" />
+  </EntityType>
+  <EntityType Name="EmployeeText">
+    <Key>
+      <PropertyRef Name="TextId" />
+    </Key>
+    <Property Name="TextId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TextBody" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ReceiverUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SenderUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="JobCategory">
+    <Key>
+      <PropertyRef Name="JobId" />
+    </Key>
+    <Property Name="JobId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JobTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Salary" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_JobCategories" FromRole="JobCategories" ToRole="Employees" />
+  </EntityType>
+  <EntityType Name="Notice">
+    <Key>
+      <PropertyRef Name="NoticeId" />
+    </Key>
+    <Property Name="NoticeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NoticeTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NoticeBody" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ReceiverType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RawMaterial">
+    <Key>
+      <PropertyRef Name="MaterialId" />
+    </Key>
+    <Property Name="MaterialId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaterialName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="UnitPrice" Type="Double" Nullable="false" />
+    <Property Name="ReceivingDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="RawMaterialUsesLogs" Relationship="Self.FK_RawMaterialUsesLogs_RawMaterials" FromRole="RawMaterials" ToRole="RawMaterialUsesLogs" />
+  </EntityType>
+  <EntityType Name="RawMaterialUsesLog">
+    <Key>
+      <PropertyRef Name="LogId" />
+    </Key>
+    <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MaterialId" Type="Int32" Nullable="false" />
+    <Property Name="UsedQuantity" Type="Int32" Nullable="false" />
+    <Property Name="UnitPrice" Type="Double" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ManufacturingCost" Type="Double" Nullable="false" />
+    <NavigationProperty Name="RawMaterial" Relationship="Self.FK_RawMaterialUsesLogs_RawMaterials" FromRole="RawMaterialUsesLogs" ToRole="RawMaterials" />
+  </EntityType>
+  <EntityType Name="RegistrationRequest">
+    <Key>
+      <PropertyRef Name="RegistrationId" />
+    </Key>
+    <Property Name="RegistrationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ProfilePicture" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RequestToSupport">
+    <Key>
+      <PropertyRef Name="RequestId" />
+    </Key>
+    <Property Name="RequestId" Type="Int32" Nullable="false" />
+    <Property Name="RequestSubject" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RequestBody" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SenderUserName" Type="Int32" Nullable="false" />
+    <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SupplierLog">
+    <Key>
+      <PropertyRef Name="LogId" />
+    </Key>
+    <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Time" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Comment" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="ScheduleId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SupplierSchedule" Relationship="Self.FK_SupplierLog_SupplierSchedules" FromRole="SupplierLog" ToRole="SupplierSchedules" />
+  </EntityType>
+  <EntityType Name="SupplierSchedule">
+    <Key>
+      <PropertyRef Name="ScheduleId" />
+    </Key>
+    <Property Name="ScheduleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WorkType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="SupplierLogs" Relationship="Self.FK_SupplierLog_SupplierSchedules" FromRole="SupplierSchedules" ToRole="SupplierLog" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserType" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserStatus" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VendorProduct">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ShortDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LongDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UnitPrice" Type="Double" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="ProductPicture" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="VendorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Vendor" Relationship="Self.FK_VendorProducts_Vendors" FromRole="VendorProducts" ToRole="Vendors" />
+  </EntityType>
+  <EntityType Name="Vendor">
+    <Key>
+      <PropertyRef Name="VendorId" />
+    </Key>
+    <Property Name="VendorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="VendorName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ProfilePicture" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="VendorProducts" Relationship="Self.FK_VendorProducts_Vendors" FromRole="Vendors" ToRole="VendorProducts" />
+  </EntityType>
+  <EntityType Name="CompanyLineItem">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+      <PropertyRef Name="ProductId" />
+      <PropertyRef Name="Quantity" />
+      <PropertyRef Name="UnitPrice" />
+      <PropertyRef Name="Total" />
+    </Key>
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="UnitPrice" Type="Double" Nullable="false" />
+    <Property Name="Total" Type="Double" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CustomerLineItem">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+      <PropertyRef Name="ProductId" />
+      <PropertyRef Name="Quantity" />
+      <PropertyRef Name="UnitPrice" />
+      <PropertyRef Name="Total" />
+    </Key>
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="UnitPrice" Type="Double" Nullable="false" />
+    <Property Name="Total" Type="Double" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Employees_JobCategories">
+    <End Role="JobCategories" Type="Self.JobCategory" Multiplicity="1" />
+    <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobCategories">
+        <PropertyRef Name="JobId" />
+      </Principal>
+      <Dependent Role="Employees">
+        <PropertyRef Name="JobId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RawMaterialUsesLogs_RawMaterials">
+    <End Role="RawMaterials" Type="Self.RawMaterial" Multiplicity="1" />
+    <End Role="RawMaterialUsesLogs" Type="Self.RawMaterialUsesLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RawMaterials">
+        <PropertyRef Name="MaterialId" />
+      </Principal>
+      <Dependent Role="RawMaterialUsesLogs">
+        <PropertyRef Name="MaterialId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupplierLog_SupplierSchedules">
+    <End Role="SupplierSchedules" Type="Self.SupplierSchedule" Multiplicity="1" />
+    <End Role="SupplierLog" Type="Self.SupplierLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SupplierSchedules">
+        <PropertyRef Name="ScheduleId" />
+      </Principal>
+      <Dependent Role="SupplierLog">
+        <PropertyRef Name="ScheduleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VendorProducts_Vendors">
+    <End Role="Vendors" Type="Self.Vendor" Multiplicity="1" />
+    <End Role="VendorProducts" Type="Self.VendorProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendors">
+        <PropertyRef Name="VendorId" />
+      </Principal>
+      <Dependent Role="VendorProducts">
+        <PropertyRef Name="VendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BusinessERPDbContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CompanyInvoices" EntityType="Self.CompanyInvoice" />
+    <EntitySet Name="CompanyProducts" EntityType="Self.CompanyProduct" />
+    <EntitySet Name="CustomerInvoices" EntityType="Self.CustomerInvoice" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="CustomerTexts" EntityType="Self.CustomerText" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="EmployeeTexts" EntityType="Self.EmployeeText" />
+    <EntitySet Name="JobCategories" EntityType="Self.JobCategory" />
+    <EntitySet Name="Notices" EntityType="Self.Notice" />
+    <EntitySet Name="RawMaterials" EntityType="Self.RawMaterial" />
+    <EntitySet Name="RawMaterialUsesLogs" EntityType="Self.RawMaterialUsesLog" />
+    <EntitySet Name="RegistrationRequests" EntityType="Self.RegistrationRequest" />
+    <EntitySet Name="RequestToSupports" EntityType="Self.RequestToSupport" />
+    <EntitySet Name="SupplierLogs" EntityType="Self.SupplierLog" />
+    <EntitySet Name="SupplierSchedules" EntityType="Self.SupplierSchedule" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="VendorProducts" EntityType="Self.VendorProduct" />
+    <EntitySet Name="Vendors" EntityType="Self.Vendor" />
+    <EntitySet Name="CompanyLineItems" EntityType="Self.CompanyLineItem" />
+    <EntitySet Name="CustomerLineItems" EntityType="Self.CustomerLineItem" />
+    <AssociationSet Name="FK_Employees_JobCategories" Association="Self.FK_Employees_JobCategories">
+      <End Role="JobCategories" EntitySet="JobCategories" />
+      <End Role="Employees" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RawMaterialUsesLogs_RawMaterials" Association="Self.FK_RawMaterialUsesLogs_RawMaterials">
+      <End Role="RawMaterials" EntitySet="RawMaterials" />
+      <End Role="RawMaterialUsesLogs" EntitySet="RawMaterialUsesLogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupplierLog_SupplierSchedules" Association="Self.FK_SupplierLog_SupplierSchedules">
+      <End Role="SupplierSchedules" EntitySet="SupplierSchedules" />
+      <End Role="SupplierLog" EntitySet="SupplierLogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VendorProducts_Vendors" Association="Self.FK_VendorProducts_Vendors">
+      <End Role="Vendors" EntitySet="Vendors" />
+      <End Role="VendorProducts" EntitySet="VendorProducts" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
