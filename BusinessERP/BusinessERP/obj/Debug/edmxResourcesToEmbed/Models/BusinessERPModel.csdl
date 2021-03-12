@@ -13,6 +13,17 @@
     <Property Name="VendorUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="EmployeeUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
+  <EntityType Name="CompanyLineItem">
+    <Key>
+      <PropertyRef Name="LineId" />
+    </Key>
+    <Property Name="LineId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="UnitPrice" Type="Double" Nullable="false" />
+    <Property Name="Total" Type="Double" Nullable="false" />
+  </EntityType>
   <EntityType Name="CompanyProduct">
     <Key>
       <PropertyRef Name="ProductId" />
@@ -37,6 +48,17 @@
     <Property Name="CreditCardType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="CardNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="CustomerUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CustomerLineItem">
+    <Key>
+      <PropertyRef Name="LineId" />
+    </Key>
+    <Property Name="LineId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="UnitPrice" Type="Double" Nullable="false" />
+    <Property Name="Total" Type="Double" Nullable="false" />
   </EntityType>
   <EntityType Name="Customer">
     <Key>
@@ -214,34 +236,6 @@
     <Property Name="Status" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="VendorProducts" Relationship="Self.FK_VendorProducts_Vendors" FromRole="Vendors" ToRole="VendorProducts" />
   </EntityType>
-  <EntityType Name="CompanyLineItem">
-    <Key>
-      <PropertyRef Name="InvoiceId" />
-      <PropertyRef Name="ProductId" />
-      <PropertyRef Name="Quantity" />
-      <PropertyRef Name="UnitPrice" />
-      <PropertyRef Name="Total" />
-    </Key>
-    <Property Name="InvoiceId" Type="Int32" Nullable="false" />
-    <Property Name="ProductId" Type="Int32" Nullable="false" />
-    <Property Name="Quantity" Type="Int32" Nullable="false" />
-    <Property Name="UnitPrice" Type="Double" Nullable="false" />
-    <Property Name="Total" Type="Double" Nullable="false" />
-  </EntityType>
-  <EntityType Name="CustomerLineItem">
-    <Key>
-      <PropertyRef Name="InvoiceId" />
-      <PropertyRef Name="ProductId" />
-      <PropertyRef Name="Quantity" />
-      <PropertyRef Name="UnitPrice" />
-      <PropertyRef Name="Total" />
-    </Key>
-    <Property Name="InvoiceId" Type="Int32" Nullable="false" />
-    <Property Name="ProductId" Type="Int32" Nullable="false" />
-    <Property Name="Quantity" Type="Int32" Nullable="false" />
-    <Property Name="UnitPrice" Type="Double" Nullable="false" />
-    <Property Name="Total" Type="Double" Nullable="false" />
-  </EntityType>
   <Association Name="FK_Employees_JobCategories">
     <End Role="JobCategories" Type="Self.JobCategory" Multiplicity="1" />
     <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
@@ -292,8 +286,10 @@
   </Association>
   <EntityContainer Name="BusinessERPDbContext" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="CompanyInvoices" EntityType="Self.CompanyInvoice" />
+    <EntitySet Name="CompanyLineItems" EntityType="Self.CompanyLineItem" />
     <EntitySet Name="CompanyProducts" EntityType="Self.CompanyProduct" />
     <EntitySet Name="CustomerInvoices" EntityType="Self.CustomerInvoice" />
+    <EntitySet Name="CustomerLineItems" EntityType="Self.CustomerLineItem" />
     <EntitySet Name="Customers" EntityType="Self.Customer" />
     <EntitySet Name="CustomerTexts" EntityType="Self.CustomerText" />
     <EntitySet Name="Employees" EntityType="Self.Employee" />
@@ -309,8 +305,6 @@
     <EntitySet Name="Users" EntityType="Self.User" />
     <EntitySet Name="VendorProducts" EntityType="Self.VendorProduct" />
     <EntitySet Name="Vendors" EntityType="Self.Vendor" />
-    <EntitySet Name="CompanyLineItems" EntityType="Self.CompanyLineItem" />
-    <EntitySet Name="CustomerLineItems" EntityType="Self.CustomerLineItem" />
     <AssociationSet Name="FK_Employees_JobCategories" Association="Self.FK_Employees_JobCategories">
       <End Role="JobCategories" EntitySet="JobCategories" />
       <End Role="Employees" EntitySet="Employees" />

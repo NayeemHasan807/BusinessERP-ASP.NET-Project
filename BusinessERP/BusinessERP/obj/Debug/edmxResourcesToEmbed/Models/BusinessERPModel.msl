@@ -15,6 +15,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CompanyLineItems">
+      <EntityTypeMapping TypeName="BusinessERPModel.CompanyLineItem">
+        <MappingFragment StoreEntitySet="CompanyLineItems">
+          <ScalarProperty Name="LineId" ColumnName="LineId" />
+          <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="CompanyProducts">
       <EntityTypeMapping TypeName="BusinessERPModel.CompanyProduct">
         <MappingFragment StoreEntitySet="CompanyProducts">
@@ -39,6 +51,18 @@
           <ScalarProperty Name="CreditCardType" ColumnName="CreditCardType" />
           <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
           <ScalarProperty Name="CustomerUserName" ColumnName="CustomerUserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerLineItems">
+      <EntityTypeMapping TypeName="BusinessERPModel.CustomerLineItem">
+        <MappingFragment StoreEntitySet="CustomerLineItems">
+          <ScalarProperty Name="LineId" ColumnName="LineId" />
+          <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -222,28 +246,6 @@
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
           <ScalarProperty Name="Status" ColumnName="Status" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CompanyLineItems">
-      <EntityTypeMapping TypeName="BusinessERPModel.CompanyLineItem">
-        <MappingFragment StoreEntitySet="CompanyLineItems">
-          <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
-          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-          <ScalarProperty Name="Total" ColumnName="Total" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CustomerLineItems">
-      <EntityTypeMapping TypeName="BusinessERPModel.CustomerLineItem">
-        <MappingFragment StoreEntitySet="CustomerLineItems">
-          <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
-          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-          <ScalarProperty Name="Total" ColumnName="Total" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

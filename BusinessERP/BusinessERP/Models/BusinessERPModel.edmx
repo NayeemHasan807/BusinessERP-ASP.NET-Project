@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="BusinessERPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="BusinessERPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CompanyInvoices">
           <Key>
             <PropertyRef Name="InvoiceId" />
@@ -20,9 +20,9 @@
         </EntityType>
         <EntityType Name="CompanyLineItems">
           <Key>
-            <PropertyRef Name="InvoiceId" />
-            <PropertyRef Name="ProductId" />
+            <PropertyRef Name="LineId" />
           </Key>
+          <Property Name="LineId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="InvoiceId" Type="int" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
@@ -56,9 +56,9 @@
         </EntityType>
         <EntityType Name="CustomerLineItems">
           <Key>
-            <PropertyRef Name="InvoiceId" />
-            <PropertyRef Name="ProductId" />
+            <PropertyRef Name="LineId" />
           </Key>
+          <Property Name="LineId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="InvoiceId" Type="int" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
@@ -319,7 +319,8 @@
             <End Role="VendorProducts" EntitySet="VendorProducts" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BusinessERPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -335,6 +336,17 @@
           <Property Name="CardNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="VendorUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="EmployeeUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyLineItem">
+          <Key>
+            <PropertyRef Name="LineId" />
+          </Key>
+          <Property Name="LineId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="UnitPrice" Type="Double" Nullable="false" />
+          <Property Name="Total" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="CompanyProduct">
           <Key>
@@ -360,6 +372,17 @@
           <Property Name="CreditCardType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CardNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CustomerUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomerLineItem">
+          <Key>
+            <PropertyRef Name="LineId" />
+          </Key>
+          <Property Name="LineId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="UnitPrice" Type="Double" Nullable="false" />
+          <Property Name="Total" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -537,34 +560,6 @@
           <Property Name="Status" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="VendorProducts" Relationship="Self.FK_VendorProducts_Vendors" FromRole="Vendors" ToRole="VendorProducts" />
         </EntityType>
-        <EntityType Name="CompanyLineItem">
-          <Key>
-            <PropertyRef Name="InvoiceId" />
-            <PropertyRef Name="ProductId" />
-            <PropertyRef Name="Quantity" />
-            <PropertyRef Name="UnitPrice" />
-            <PropertyRef Name="Total" />
-          </Key>
-          <Property Name="InvoiceId" Type="Int32" Nullable="false" />
-          <Property Name="ProductId" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="UnitPrice" Type="Double" Nullable="false" />
-          <Property Name="Total" Type="Double" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CustomerLineItem">
-          <Key>
-            <PropertyRef Name="InvoiceId" />
-            <PropertyRef Name="ProductId" />
-            <PropertyRef Name="Quantity" />
-            <PropertyRef Name="UnitPrice" />
-            <PropertyRef Name="Total" />
-          </Key>
-          <Property Name="InvoiceId" Type="Int32" Nullable="false" />
-          <Property Name="ProductId" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="UnitPrice" Type="Double" Nullable="false" />
-          <Property Name="Total" Type="Double" Nullable="false" />
-        </EntityType>
         <Association Name="FK_Employees_JobCategories">
           <End Role="JobCategories" Type="Self.JobCategory" Multiplicity="1" />
           <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
@@ -615,8 +610,10 @@
         </Association>
         <EntityContainer Name="BusinessERPDbContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CompanyInvoices" EntityType="Self.CompanyInvoice" />
+          <EntitySet Name="CompanyLineItems" EntityType="Self.CompanyLineItem" />
           <EntitySet Name="CompanyProducts" EntityType="Self.CompanyProduct" />
           <EntitySet Name="CustomerInvoices" EntityType="Self.CustomerInvoice" />
+          <EntitySet Name="CustomerLineItems" EntityType="Self.CustomerLineItem" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="CustomerTexts" EntityType="Self.CustomerText" />
           <EntitySet Name="Employees" EntityType="Self.Employee" />
@@ -632,8 +629,6 @@
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="VendorProducts" EntityType="Self.VendorProduct" />
           <EntitySet Name="Vendors" EntityType="Self.Vendor" />
-          <EntitySet Name="CompanyLineItems" EntityType="Self.CompanyLineItem" />
-          <EntitySet Name="CustomerLineItems" EntityType="Self.CustomerLineItem" />
           <AssociationSet Name="FK_Employees_JobCategories" Association="Self.FK_Employees_JobCategories">
             <End Role="JobCategories" EntitySet="JobCategories" />
             <End Role="Employees" EntitySet="Employees" />
@@ -671,6 +666,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CompanyLineItems">
+            <EntityTypeMapping TypeName="BusinessERPModel.CompanyLineItem">
+              <MappingFragment StoreEntitySet="CompanyLineItems">
+                <ScalarProperty Name="LineId" ColumnName="LineId" />
+                <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CompanyProducts">
             <EntityTypeMapping TypeName="BusinessERPModel.CompanyProduct">
               <MappingFragment StoreEntitySet="CompanyProducts">
@@ -695,6 +702,18 @@
                 <ScalarProperty Name="CreditCardType" ColumnName="CreditCardType" />
                 <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
                 <ScalarProperty Name="CustomerUserName" ColumnName="CustomerUserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerLineItems">
+            <EntityTypeMapping TypeName="BusinessERPModel.CustomerLineItem">
+              <MappingFragment StoreEntitySet="CustomerLineItems">
+                <ScalarProperty Name="LineId" ColumnName="LineId" />
+                <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -878,28 +897,6 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CompanyLineItems">
-            <EntityTypeMapping TypeName="BusinessERPModel.CompanyLineItem">
-              <MappingFragment StoreEntitySet="CompanyLineItems">
-                <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CustomerLineItems">
-            <EntityTypeMapping TypeName="BusinessERPModel.CustomerLineItem">
-              <MappingFragment StoreEntitySet="CustomerLineItems">
-                <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
-                <ScalarProperty Name="Total" ColumnName="Total" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

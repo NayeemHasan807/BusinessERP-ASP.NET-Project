@@ -14,6 +14,7 @@ namespace BusinessERP.Models
     
     public partial class CustomerLineItem
     {
+        public int LineId { get; set; }
         public int InvoiceId { get; set; }
         public int ProductId { get; set; }
         public int Quantity { get; set; }
