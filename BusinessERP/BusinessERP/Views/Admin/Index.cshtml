@@ -2,7 +2,12 @@
 @{
     ViewBag.Title = "Admin Dashboard";
     Layout = "~/Views/Admin/_Layout.cshtml";
+    var profile = TempData["Profile"] as BusinessERP.Models.Employee;
 }
 
-<h2>Admin Dashboard</h2>
+<h1>Welcome</h1>
+<h2>@profile.EmployeeName</h2>
+<br />
+<img src="~/Content/ProfilePictures/@profile.ProfilePicture.ToString()" alt="Avater" width="200" height="200"/>
+
 

@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "MyProfile";
+    Layout = "~/Views/Admin/_Layout.cshtml";
+    var profile = TempData["Profile"] as BusinessERP.Models.Employee;
+    var jobdetails = TempData["JobDetails"] as BusinessERP.Models.JobCategory;
+}
+
+<h2>@profile.EmployeeName</h2>
+<img src="~/Content/ProfilePictures/@profile.ProfilePicture.ToString()" alt="Avatar" width="100" height="100" />
+<br />
+<fieldset>
+    <table id="view">
+        <tr>
+            <td>Name:</td>
+            <td>@profile.EmployeeName</td>
+        </tr>
+        <tr>
+            <td>Username :</td>
+            <td>@profile.UserName</td>
+        </tr>
+        <tr>
+            <td>Email :</td>
+            <td>@profile.Email</td>
+        </tr>
+        <tr>
+            <td>Gender :</td>
+            <td>@profile.Gender</td>
+        </tr>
+        <tr>
+            <td>Date Of Birth :</td>
+            <td>@profile.DateOfBirth</td>
+        </tr>
+        <tr>
+            <td>Address :</td>
+            <td>@profile.Address</td>
+        </tr>
+        <tr>
+            <td>Joining Date :</td>
+            <td>@profile.JoiningDate</td>
+        </tr>
+        <tr>
+            <td>Job Title :</td>
+            <td>@jobdetails.JobTitle</td>
+        </tr>
+        <tr>
+            <td>Profile Status :</td>
+            <td>@profile.Status</td>
+        </tr>
+    </table>
+</fieldset>
+<div>
+    <a href="/Admin/UpdateProfile">
+        <button type="button">
+            Update Profile
+        </button>
+    </a>
+    <a href="/Admin/ChangePassword">
+        <button type="button">
+            Change Password
+        </button>
+    </a>
+    <a href="/Admin/Index">
+        <button type="button">
+            Back
+        </button>
+    </a>
+</div>
+
+
+

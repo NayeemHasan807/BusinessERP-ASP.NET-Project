@@ -23,6 +23,7 @@ namespace BusinessERP.Controllers
                     {
                         Session["UserName"] = collection["UserName"];
                         Session["UserType"] = user.UserType;
+                        Session["LoginStatus"] = "Ok";
                         if(Session["UserType"].ToString() == "Admin")
                         {
                             return RedirectToAction("Index", "Admin");
