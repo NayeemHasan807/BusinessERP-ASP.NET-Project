@@ -27,6 +27,11 @@ namespace BusinessERP.Controllers
                         {
                             return RedirectToAction("Index", "Admin");
                         }
+                        else
+                        {
+                            TempData["Error"] = "You dont have permission to access on the site at this moment.";
+                            return RedirectToAction("Login", "Home");
+                        }
                     }
                     TempData["Error"] = "Password is incorrect";
                     return RedirectToAction("Login", "Home");
