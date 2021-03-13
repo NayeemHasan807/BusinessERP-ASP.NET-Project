@@ -1,18 +1,17 @@
 ﻿@model BusinessERP.Models.Employee
+
 @{
-    ViewBag.Title = "UpdateProfile";
+    ViewBag.Title = "Create";
     Layout = "~/Views/Admin/_Layout.cshtml";
 }
-
-<h2>Update Profile</h2>
+<h2>Add New Employee</h2>
 <br />
 <form method="post" enctype="multipart/form-data">
     <table id="view">
         <tr>
             <td>Name:</td>
             <td>
-                <input type="hidden" name="EmployeeId" value="@Model.EmployeeId" />
-                <input type="text" name="EmployeeName" value="@Model.EmployeeName" />
+                <input type="text" name="EmployeeName" value="@if (Model != null) { @Model.EmployeeName} "/>
                 <span style="color:red;background-color:white">
                     @Html.ValidationMessageFor(model => model.EmployeeName, "", new { @class = "text-danger" })
                 </span>
@@ -21,16 +20,17 @@
         <tr>
             <td>User Name :</td>
             <td>
-                <input type="hidden" name="UserName" value="@Model.UserName" />@Model.UserName
+                <input type="text" name="UserName" value="@if (Model != null) { @Model.UserName}"/>
                 <span style="color:red;background-color:white">
                     @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    @TempData["Error1"]
                 </span>
             </td>
         </tr>
         <tr>
             <td>Email :</td>
             <td>
-                <input type="text" name="Email" value="@Model.Email" />
+                <input type="text" name="Email" value="@if (Model != null) { @Model.Email}"/>
                 <span style="color:red;background-color:white">
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 </span>
@@ -39,12 +39,9 @@
         <tr>
             <td>Gender :</td>
             <td>
-                <input type="radio" name="Gender" value="Male"
-                       @if (@Model.Gender == "Male") { var s = "checked"; @s ; } /> Male
-                <input type="radio" name="Gender" value="Female"
-                       @if (@Model.Gender == "Female") { var s = "checked"; @s ; } /> Female
-                <input type="radio" name="Gender" value="Other"
-                       @if (@Model.Gender == "Other") { var s = "checked"; @s ; } /> Other
+                <input type="radio" name="Gender" value="Male" @if (Model != null) { if (Model.Gender == "Male") { var v = "checked"; @v;} }/> Male
+                <input type="radio" name="Gender" value="Female"@if (Model != null) { if (Model.Gender == "Female") { var v = "checked"; @v;} }/> Female
+                <input type="radio" name="Gender" value="Other" @if (Model != null) { if (Model.Gender == "Other") { var v = "checked"; @v;} }/> Other
                 <br />
                 <span style="color:red;background-color:white">
                     @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
@@ -54,7 +51,7 @@
         <tr>
             <td>Date Of Birth :</td>
             <td>
-                <input type="date" name="DateOfBirth" value="@Model.DateOfBirth.ToString("yyyy-MM-dd")" />
+                <input type="date" name="DateOfBirth" value="@if (Model != null) { @Model.DateOfBirth.ToString("yyyy-MM-dd")}"/>
                 <span style="color:red;background-color:white">
                     @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
                 </span>
@@ -63,7 +60,7 @@
         <tr>
             <td>Address :</td>
             <td>
-                <input type="text" name="Address" value="@Model.Address" />
+                <input type="text" name="Address" value="@if (Model != null) { @Model.Address}"/>
                 <span style="color:red;background-color:white">
                     @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                 </span>
@@ -72,7 +69,7 @@
         <tr>
             <td>Joining Date :</td>
             <td>
-                <input type="date" name="JoiningDate" value="@Model.JoiningDate.ToString("yyyy-MM-dd")" />
+                <input type="date" name="JoiningDate" value="@if (Model != null) { @Model.JoiningDate.ToString("yyyy-MM-dd")}"/>
                 <span style="color:red;background-color:white">
                     @Html.ValidationMessageFor(model => model.JoiningDate, "", new { @class = "text-danger" })
                 </span>
@@ -81,16 +78,18 @@
         <tr>
             <td>Job Title :</td>
             <td>
-                <select name="JobId" disabled>
+                <select name="JobId">
                     @foreach (var item in TempData["JobCategory"] as IList<BusinessERP.Models.JobCategory>)
                     {
-                        if (item.JobId == Model.JobId)
+                        if (Model != null)
                         {
-                            <option value="@item.JobId" selected>@item.JobTitle</option>
-                            continue;
+                            if (Model.JobId == item.JobId)
+                            {
+                                <option value="@item.JobId" selected>@item.JobTitle</option>
+                                continue;
+                            }
                         }
                         <option value="@item.JobId">@item.JobTitle</option>
-
                     }
                 </select>
                 <span style="color:red;background-color:white">
@@ -101,7 +100,7 @@
         <tr>
             <td>Profile Status :</td>
             <td>
-                <input type="hidden" name="Status" value="@Model.Status" />@Model.Status
+                <input type="hidden" name="Status" value="Active" />Active
                 <span style="color:red;background-color:white">
                     @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
                 </span>
@@ -112,15 +111,15 @@
             <td>
                 <input type="file" name="Image" />
                 <span style="color:red;background-color:white">
-                    @TempData["Error"]
+                    @TempData["Error2"]
                 </span>
             </td>
         </tr>
         <tr>
             <td colspan="3">
-                <input type="submit" value="Update" />
+                <input type="submit" value="Add" />
                 <input type="reset" />
-                <a href="/Admin/MyProfile">
+                <a href="/Admin/Index">
                     <button type="button">
                         Back
                     </button>
@@ -129,3 +128,5 @@
         </tr>
     </table>
 </form>
+
+

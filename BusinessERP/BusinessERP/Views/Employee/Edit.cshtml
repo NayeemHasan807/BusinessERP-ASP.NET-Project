@@ -1,10 +1,11 @@
 ﻿@model BusinessERP.Models.Employee
+
 @{
-    ViewBag.Title = "UpdateProfile";
+    ViewBag.Title = "Edit";
     Layout = "~/Views/Admin/_Layout.cshtml";
 }
 
-<h2>Update Profile</h2>
+<h2>Edit</h2>
 <br />
 <form method="post" enctype="multipart/form-data">
     <table id="view">
@@ -81,7 +82,7 @@
         <tr>
             <td>Job Title :</td>
             <td>
-                <select name="JobId" disabled>
+                <select name="JobId">
                     @foreach (var item in TempData["JobCategory"] as IList<BusinessERP.Models.JobCategory>)
                     {
                         if (item.JobId == Model.JobId)
@@ -118,9 +119,10 @@
         </tr>
         <tr>
             <td colspan="3">
+                <input type="hidden" name="ProfilePicture" value="@Model.ProfilePicture" />
                 <input type="submit" value="Update" />
                 <input type="reset" />
-                <a href="/Admin/MyProfile">
+                <a href="/Employee/Index">
                     <button type="button">
                         Back
                     </button>

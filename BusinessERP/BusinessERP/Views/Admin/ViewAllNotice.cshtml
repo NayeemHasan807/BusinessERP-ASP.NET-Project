@@ -27,8 +27,9 @@
             @Html.DisplayFor(modelItem => item.ReceiverType)
         </td>
         <td>
-            @Html.ActionLink("Details", "NoticeDetails", new { id=item.NoticeId }) |
-            @Html.ActionLink("Delete", "NoticeDelete", new { id=item.NoticeId })
+            @Html.ActionLink("Edit", "NoticeEdit", new { id = item.NoticeId }) |
+            @Html.ActionLink("Details", "NoticeDetails", new { id = item.NoticeId }) |
+            @Html.ActionLink("Delete", "NoticeDelete", new { id = item.NoticeId })
         </td>
     </tr>
 }

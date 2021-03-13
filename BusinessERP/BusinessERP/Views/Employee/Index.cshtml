@@ -1,0 +1,77 @@
+﻿@model IEnumerable<BusinessERP.Models.Employee>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+
+<h2>Employee List</h2>
+<br />
+<table id="view">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProfilePicture)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobCategory.JobTitle)
+        </th>
+        <th>Action</th>
+    </tr>
+
+@foreach (var item in Model) {
+    if(item.UserName==Session["UserName"].ToString())
+    {
+        continue;
+    }
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @item.DateOfBirth.ToString("yyyy-MM-dd")
+        </td>
+        <td>
+            <img src=@Url.Content(item.ProfilePicture) alt="Avater" width="50" height="50" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobCategory.JobTitle)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.EmployeeId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.EmployeeId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.EmployeeId })
+        </td>
+    </tr>
+}
+
+</table>
