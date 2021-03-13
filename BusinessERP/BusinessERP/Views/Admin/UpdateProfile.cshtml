@@ -81,7 +81,7 @@
         <tr>
             <td>Job Title :</td>
             <td>
-                <select name="JobId">
+                <select name="JobId" disabled>
                     @foreach (var item in TempData["JobCategory"] as IList<BusinessERP.Models.JobCategory>)
                     {
                         if (item.JobId == Model.JobId)
