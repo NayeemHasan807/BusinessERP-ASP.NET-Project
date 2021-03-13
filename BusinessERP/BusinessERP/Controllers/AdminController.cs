@@ -1,7 +1,9 @@
-﻿using BusinessERP.Models.ViewModels;
+﻿using BusinessERP.Models;
+using BusinessERP.Models.ViewModels;
 using BusinessERP.Repositories;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -78,6 +80,65 @@ namespace BusinessERP.Controllers
             }
             else
                 return View();
+        }
+        [HttpGet]
+        public ActionResult UpdateProfile()
+        {
+            var profile = employeerepo.GetByUserName(Session["UserName"].ToString());
+            TempData["JobCategory"] = jobcatrepo.GetAll();
+            return View(profile);
+        }
+        [HttpPost]
+        public ActionResult UpdateProfile(Employee employee, HttpPostedFileBase image)
+        {
+            var profile = employeerepo.GetByUserName(Session["UserName"].ToString());
+            TempData["JobCategory"] = jobcatrepo.GetAll();
+            if (ModelState.IsValid)
+            {
+                if(image != null)
+                {
+                    if (Path.GetExtension(image.FileName)==".jpg" | Path.GetExtension(image.FileName) == ".png")
+                    {
+                        string name = Path.GetFileNameWithoutExtension(image.FileName);
+                        string extention = Path.GetExtension(image.FileName);
+                        name = name + DateTime.Now.ToString("yyyy-MM-dd")+extention;
+                        string ProfilePicture = "~/Content/ProfilePictures/" + name;
+                        string filepath = Path.Combine(Server.MapPath("~/Content/ProfilePictures/"),name);
+                        image.SaveAs(filepath);
+
+                        profile.EmployeeName = employee.EmployeeName;
+                        profile.Email = employee.Email;
+                        profile.Gender = employee.Gender;
+                        profile.DateOfBirth = employee.DateOfBirth;
+                        profile.Address = employee.Address;
+                        profile.JoiningDate = employee.JoiningDate;
+                        profile.JobId = employee.JobId;
+                        profile.ProfilePicture = ProfilePicture;
+
+                        employeerepo.Update(profile);
+                        return RedirectToAction("MyProfile", "Admin");
+                    }
+                    else
+                    {
+                        TempData["Error"] = "Profile picture must need to be type '.jpg' or '.png'";
+                        return View(profile);
+                    }
+                }
+                else
+                {
+                    profile.EmployeeName = employee.EmployeeName;
+                    profile.Email = employee.Email;
+                    profile.Gender = employee.Gender;
+                    profile.DateOfBirth = employee.DateOfBirth;
+                    profile.Address = employee.Address;
+                    profile.JoiningDate = employee.JoiningDate;
+                    profile.JobId = employee.JobId;
+
+                    employeerepo.Update(profile);
+                    return RedirectToAction("MyProfile","Admin");
+                }
+            } 
+            return View(profile);
         }
     }
 }

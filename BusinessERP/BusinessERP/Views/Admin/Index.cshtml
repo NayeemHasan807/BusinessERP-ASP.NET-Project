@@ -8,6 +8,6 @@
 <h1>Welcome</h1>
 <h2>@profile.EmployeeName</h2>
 <br />
-<img src="~/Content/ProfilePictures/@profile.ProfilePicture.ToString()" alt="Avater" width="200" height="200"/>
+<img src=@Url.Content(@profile.ProfilePicture.ToString()) alt="Avater" width="200" height="200"/>
 
 

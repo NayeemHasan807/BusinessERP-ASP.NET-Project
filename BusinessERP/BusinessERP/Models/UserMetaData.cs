@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace BusinessERP.Models.MetaDataModels
+namespace BusinessERP.Models
 {
     public class UserMetaData
     {

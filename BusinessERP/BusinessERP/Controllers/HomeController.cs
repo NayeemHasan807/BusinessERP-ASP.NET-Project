@@ -26,7 +26,17 @@ namespace BusinessERP.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            return View();
+            if(Session["UserType"]!=null)
+            {
+                if (Session["UserType"].ToString() == "Admin")
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
+                else
+                    return View();
+            }
+            else
+                return View();
         }
         [HttpGet]
         public ActionResult Registration()

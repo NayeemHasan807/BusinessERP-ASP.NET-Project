@@ -14,7 +14,7 @@
         <EntityTypeShape EntityType="BusinessERPModel.CustomerText" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BusinessERPModel.Employee" Width="1.5" PointX="8" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="BusinessERPModel.EmployeeText" Width="1.5" PointX="10.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BusinessERPModel.JobCategory" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BusinessERPModel.JobCategory" Width="1.5" PointX="5.875" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BusinessERPModel.Notice" Width="1.5" PointX="10.75" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BusinessERPModel.RawMaterial" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="BusinessERPModel.RawMaterialUsesLog" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />

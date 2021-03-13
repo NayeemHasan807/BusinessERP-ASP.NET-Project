@@ -7,7 +7,7 @@
 }
 
 <h2>@profile.EmployeeName</h2>
-<img src="~/Content/ProfilePictures/@profile.ProfilePicture.ToString()" alt="Avatar" width="100" height="100" />
+<img src=@Url.Content(@profile.ProfilePicture.ToString()) alt="Avater" width="100" height="100" />
 <br />
 <fieldset>
     <table id="view">

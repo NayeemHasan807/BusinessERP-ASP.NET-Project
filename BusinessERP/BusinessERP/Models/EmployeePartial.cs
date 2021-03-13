@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace BusinessERP.Models.MetaDataModels
+namespace BusinessERP.Models
 {
-    [MetadataType(typeof(UserMetaData))]
-    public partial class User
+    [MetadataType(typeof(EmployeeMetaData))]
+    public partial class Employee
     {
     }
 }
