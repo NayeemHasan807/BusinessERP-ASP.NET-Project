@@ -1,0 +1,54 @@
+﻿@model BusinessERP.Models.EmployeeText
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/EmployeeText/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+<div style="background-color:black;">
+    <br />
+    <h3 style="color:red">Are you sure you want to delete this?</h3>
+    <br />
+</div>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TextBody)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TextBody)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceiverUserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReceiverUserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SenderUserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SenderUserName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" />
+            <a href="/EmployeeText/SendByMe">
+                <button type="button">
+                    Back
+                </button>
+            </a>
+        </div>
+    }
+</div>
