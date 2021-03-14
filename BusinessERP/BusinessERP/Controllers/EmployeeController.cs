@@ -34,6 +34,19 @@ namespace BusinessERP.Controllers
             else
                 return RedirectToAction("Login", "Home");
         }
+        [HttpPost]
+        public ActionResult Index(FormCollection collection)
+        {
+            if (collection["searchkey"] == null)
+            {
+                TempData["searchkey"] = collection["searchkey"];
+                List<Employee> all = employeerepo.GetAll();
+                return View(all);
+            }
+            TempData["searchkey"] = collection["searchkey"];
+            List<Employee> list = employeerepo.GetAllSearchedByName(collection["searchkey"]);
+            return View(list);
+        }
         [HttpGet]
         public ActionResult Create()
         {
@@ -183,5 +196,22 @@ namespace BusinessERP.Controllers
             else
                 return RedirectToAction("Login", "Home");
         }
+        [HttpGet]
+        public ActionResult AdvancedSearch()
+        {
+            TempData["JobCategory"] = jobcatrepo.GetAll();
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AdvancedSearch(FormCollection collection,int category)
+        {
+            TempData["searchkey"] = collection["searchkey"];
+            TempData["order"] = collection["order"];
+            TempData["category"] = category;
+            TempData["JobCategory"] = jobcatrepo.GetAll();
+            var data = employeerepo.GetAllByAdvancedSearch(category, collection["order"], collection["searchkey"]);
+            return View(data);
+        }
+
     }
 }

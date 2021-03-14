@@ -9,9 +9,9 @@ namespace BusinessERP.Models
     public class EmployeeMetaData
     {
         public int EmployeeId { get; set; }
-        [Required,MinLength(4),MaxLength(30)]
+        [Required,MinLength(4),MaxLength(30),Display(Name = "Full Name")]
         public string EmployeeName { get; set; }
-        [Required,MinLength(3),Display(Name ="Full Name")]
+        [Required,MinLength(3)]
         public string UserName { get; set; }
         [Required, EmailAddress] 
         public string Email { get; set; }
