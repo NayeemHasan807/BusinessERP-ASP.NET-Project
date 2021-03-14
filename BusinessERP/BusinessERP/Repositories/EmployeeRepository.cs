@@ -19,26 +19,53 @@ namespace BusinessERP.Repositories
         }
         public List<Employee> GetAllByAdvancedSearch(int category,string order,string searchkey)
         {
-            if(searchkey!=null)
+            if(category!=0)
             {
-                if (order == "Descending")
+                if (searchkey != null)
                 {
-                    var list1 = context.Employees.Where(x => x.JobId == category).Where(x => x.EmployeeName.Contains(searchkey)).OrderByDescending(s => s.EmployeeName).ToList();
-                    return list1;
+                    if (order == "Descending")
+                    {
+                        var list1 = context.Employees.Where(x => x.JobId == category).Where(x => x.EmployeeName.Contains(searchkey)).OrderByDescending(s => s.EmployeeName).ToList();
+                        return list1;
+                    }
+                    var list2 = context.Employees.Where(x => x.JobId == category).Where(x => x.EmployeeName.Contains(searchkey)).ToList();
+                    return list2;
                 }
-                var list2 = context.Employees.Where(x => x.JobId == category).Where(x => x.EmployeeName.Contains(searchkey)).ToList();
-                return list2;
+                else
+                {
+                    if (order == "Descending")
+                    {
+                        var list3 = context.Employees.Where(x => x.JobId == category).OrderByDescending(s => s.EmployeeName).ToList();
+                        return list3;
+                    }
+                    var list4 = context.Employees.Where(x => x.JobId == category).ToList();
+                    return list4;
+                }
             }
             else
             {
-                if (order == "Descending")
+                if (searchkey != null)
                 {
-                    var list3 = context.Employees.Where(x => x.JobId == category).OrderByDescending(s => s.EmployeeName).ToList();
-                    return list3;
+                    if (order == "Descending")
+                    {
+                        var list1 = context.Employees.Where(x => x.EmployeeName.Contains(searchkey)).OrderByDescending(s => s.EmployeeName).ToList();
+                        return list1;
+                    }
+                    var list2 = context.Employees.Where(x => x.EmployeeName.Contains(searchkey)).ToList();
+                    return list2;
                 }
-                var list4 = context.Employees.Where(x => x.JobId == category).ToList();
-                return list4;
+                else
+                {
+                    if (order == "Descending")
+                    {
+                        var list3 = context.Employees.OrderByDescending(s => s.EmployeeName).ToList();
+                        return list3;
+                    }
+                    var list4 = context.Employees.ToList();
+                    return list4;
+                }
             }
+            
             
         }
     }

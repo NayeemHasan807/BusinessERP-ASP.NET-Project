@@ -26,11 +26,19 @@
             </select>
             Job Category:
             <select name="category">
+                <option value="0"
+                        @if (TempData["category"] != null) { var i = 0; if ((int)TempData["category"] == i) { var s = "selected"; @s ; } }>
+                    All
+                </option>
                 @foreach (var item in TempData["JobCategory"] as IList<BusinessERP.Models.JobCategory>)
                 {
-                    if(TempData["category"]!=null)
+                    if (TempData["category"] != null)
                     {
-                        <option value="@item.JobId" @if ((int)TempData["category"] == item.JobId) { var s = "selected"; @s}>@item.JobTitle</option>
+                        if ((int)TempData["category"] == item.JobId)
+                        {
+                            <option value="@item.JobId" selected>@item.JobTitle</option>
+                            continue;
+                        }
                     }
                     <option value="@item.JobId">@item.JobTitle</option>
                 }
