@@ -14,7 +14,7 @@ namespace BusinessERP.Repositories
         }
         public List<Employee> GetAllSearchedByName(string name)
         {
-            var list = context.Employees.Where(x => x.EmployeeName.Contains(name)).ToList();
+            var list = context.Employees.Where(x => x.EmployeeName.Contains(name)).OrderBy(x => x.EmployeeName).ToList();
             return list;
         }
         public List<Employee> GetAllByAdvancedSearch(int category,string order,string searchkey)
@@ -28,7 +28,7 @@ namespace BusinessERP.Repositories
                         var list1 = context.Employees.Where(x => x.JobId == category).Where(x => x.EmployeeName.Contains(searchkey)).OrderByDescending(s => s.EmployeeName).ToList();
                         return list1;
                     }
-                    var list2 = context.Employees.Where(x => x.JobId == category).Where(x => x.EmployeeName.Contains(searchkey)).ToList();
+                    var list2 = context.Employees.Where(x => x.JobId == category).Where(x => x.EmployeeName.Contains(searchkey)).OrderBy(x => x.EmployeeName).ToList();
                     return list2;
                 }
                 else
@@ -38,7 +38,7 @@ namespace BusinessERP.Repositories
                         var list3 = context.Employees.Where(x => x.JobId == category).OrderByDescending(s => s.EmployeeName).ToList();
                         return list3;
                     }
-                    var list4 = context.Employees.Where(x => x.JobId == category).ToList();
+                    var list4 = context.Employees.Where(x => x.JobId == category).OrderBy(x => x.EmployeeName).ToList();
                     return list4;
                 }
             }
@@ -51,7 +51,7 @@ namespace BusinessERP.Repositories
                         var list1 = context.Employees.Where(x => x.EmployeeName.Contains(searchkey)).OrderByDescending(s => s.EmployeeName).ToList();
                         return list1;
                     }
-                    var list2 = context.Employees.Where(x => x.EmployeeName.Contains(searchkey)).ToList();
+                    var list2 = context.Employees.Where(x => x.EmployeeName.Contains(searchkey)).OrderBy(x => x.EmployeeName).ToList();
                     return list2;
                 }
                 else
@@ -61,7 +61,7 @@ namespace BusinessERP.Repositories
                         var list3 = context.Employees.OrderByDescending(s => s.EmployeeName).ToList();
                         return list3;
                     }
-                    var list4 = context.Employees.ToList();
+                    var list4 = context.Employees.OrderBy(x => x.EmployeeName).ToList();
                     return list4;
                 }
             }

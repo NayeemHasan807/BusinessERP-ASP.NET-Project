@@ -254,6 +254,43 @@ namespace BusinessERP.Controllers
             else
                 return RedirectToAction("Login", "Home");
         }
+        [HttpGet]
+        public ActionResult Report()
+        {
+            if (CheckAccess())
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
+        [HttpGet]
+        public ActionResult UserReport()
+        {
+            if (CheckAccess())
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
+        [HttpPost]
+        public ActionResult UserBarChart()
+        {
+            if (CheckAccess())
+            {
+                var user = userrepo.GetAll();
+                var category = user.Select(x => x.UserType).Distinct();
+                List<int> value = new List<int>();
+                foreach(var item in category)
+                {
+                    value.Add(user.Count(x => x.UserType == item));
+                }
+                return Json(new{ category, value }, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
 
     }
 }
