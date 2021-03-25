@@ -12,17 +12,14 @@ namespace BusinessERP.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class VendorProduct
+    public partial class SupportLog
     {
-        public int ProductId { get; set; }
-        public string ProductName { get; set; }
-        public string ShortDescription { get; set; }
-        public string LongDescription { get; set; }
-        public double UnitPrice { get; set; }
-        public int Quantity { get; set; }
-        public string ProductPicture { get; set; }
-        public int VendorId { get; set; }
-    
-        public virtual Vendor Vendor { get; set; }
+        public int LogId { get; set; }
+        public string RequestSubject { get; set; }
+        public string RequestBody { get; set; }
+        public string SenderUserName { get; set; }
+        public string UserType { get; set; }
+        public System.DateTime Date { get; set; }
+        public string SupportUserName { get; set; }
     }
 }

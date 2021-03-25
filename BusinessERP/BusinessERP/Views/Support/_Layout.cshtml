@@ -18,16 +18,21 @@
             <div class="subtitle">
                 @Session["UserType"].ToString()
             </div>
+            @*Support*@
             <ul class="list-items">
-                <li><a href="/Admin/Index"><i class="fas fa-home"></i>Dashboard</a></li>
-                <li><a href="/Employee/Create"><i class="fas fa-plus"></i>Add New Employee</a></li>
-                <li><a href="/Employee/Index"><i class="fas fa-list-ol"></i>Employee List</a></li>
+                <li><a href="/Support/Index"><i class="fas fa-home"></i>Dashboard</a></li>
+                <li><a href="/Support/ViewRegistrationRequest"><i class="fas fa-users-cog"></i>Registration Request</a></li>
+                <li><a href="/Support/ViewSupportRequest"><i class="fas fa-users-cog"></i>Support Request</a></li>
+                <li><a href="/Support/CustomerList"><i class="fas fa-list-ol"></i>Customer List</a></li>
+                <li><a href="/Support/VendorList"><i class="fas fa-list-ol"></i>Vendor List</a></li>
+                @*<li><a href="/Employee/Create"><i class="fas fa-plus"></i>Add New Employee</a></li>
+                <li><a href="/Support/ViewNotice"><i class="fas fa-bell"></i>Notices</a></li>
                 <li><a href="/Employee/AdvancedSearch"><i class="fas fa-search"></i>Advanced Search</a></li>
                 <li><a href="/EmployeeText/Index"><i class="fas fa-inbox"></i>Massages</a></li>
                 <li><a href="/Admin/ViewAllNotice"><i class="fas fa-bell"></i>Notices</a></li>
                 <li><a href="/Admin/CreateNewNotice"><i class="fas fa-paper-plane"></i>Send Notice</a></li>
                 <li><a href="/Admin/Report"><i class="fas fa-file-pdf"></i>Report</a></li>
-                <li><a href="/Admin/MyProfile"><i class="fas fa-user"></i>Profile</a></li>
+                <li><a href="/Profile/MyProfile"><i class="fas fa-user"></i>Profile</a></li>*@
                 <li><a href="/Logout/Index"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
             </ul>
         </nav>

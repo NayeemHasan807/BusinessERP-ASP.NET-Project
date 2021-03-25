@@ -160,6 +160,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="RegistrationRequestLogs">
+      <EntityTypeMapping TypeName="BusinessERPModel.RegistrationRequestLog">
+        <MappingFragment StoreEntitySet="RegistrationRequestLog">
+          <ScalarProperty Name="LogId" ColumnName="LogId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="SupportUserName" ColumnName="SupportUserName" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="RegistrationRequests">
       <EntityTypeMapping TypeName="BusinessERPModel.RegistrationRequest">
         <MappingFragment StoreEntitySet="RegistrationRequests">
@@ -206,6 +218,19 @@
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="Time" ColumnName="Time" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SupportLogs">
+      <EntityTypeMapping TypeName="BusinessERPModel.SupportLog">
+        <MappingFragment StoreEntitySet="SupportLog">
+          <ScalarProperty Name="LogId" ColumnName="LogId" />
+          <ScalarProperty Name="RequestSubject" ColumnName="RequestSubject" />
+          <ScalarProperty Name="RequestBody" ColumnName="RequestBody" />
+          <ScalarProperty Name="SenderUserName" ColumnName="SenderUserName" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="SupportUserName" ColumnName="SupportUserName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

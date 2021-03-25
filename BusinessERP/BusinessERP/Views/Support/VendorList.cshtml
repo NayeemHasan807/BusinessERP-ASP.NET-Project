@@ -1,0 +1,81 @@
+﻿@model IEnumerable<BusinessERP.Models.Vendor>
+
+@{
+    ViewBag.Title = "VendorList";
+    Layout = "~/Views/Support/_Layout.cshtml";
+}
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<h2>Vendor List</h2>
+<br />
+<div>
+    <table class="table" id="view">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.VendorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProfilePicture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VendorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @item.DateOfBirth.ToString("yyyy-MM-dd")
+                </td>
+                <td>
+                    <img src=@Url.Content(item.ProfilePicture) alt="Avater" width="50" height="50" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    <a href="/Support/VendorDetails/@item.VendorId" class="btn btn-info">Details</a>
+                    @if (item.Status.ToString() == "Active")
+                    {
+                        <a href="/Support/VendorBlock/@item.VendorId" class="btn btn-danger">Block</a>
+                    }
+                    else
+                    {
+                        <a href="/Support/VendorUnblock/@item.VendorId" class="btn btn-success">Unblock</a>
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<a href="/Support/Index">
+    <button type="button">
+        Back
+    </button>
+</a>

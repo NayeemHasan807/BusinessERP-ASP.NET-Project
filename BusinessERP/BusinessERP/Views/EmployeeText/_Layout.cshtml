@@ -25,6 +25,11 @@
                            string path = "/Admin/Index";
                            @path;
                        }
+                       else if(@Session["UserType"].ToString() == "Support")
+                       {
+                           string path = "/Support/Index";
+                           @path;
+                       }
                        "><i class="fas fa-arrow-left"></i>Back</a></li>
                 <li><a href="/EmployeeText/Index"><i class="fas fa-inbox"></i>Inbox</a></li>
                 <li><a href="/EmployeeText/SendByMe"><i class="fas fa-inbox"></i>Text Sended By Me</a></li>

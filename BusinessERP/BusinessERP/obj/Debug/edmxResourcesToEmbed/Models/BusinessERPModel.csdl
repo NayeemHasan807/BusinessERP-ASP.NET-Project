@@ -150,6 +150,17 @@
     <Property Name="ManufacturingCost" Type="Double" Nullable="false" />
     <NavigationProperty Name="RawMaterial" Relationship="Self.FK_RawMaterialUsesLogs_RawMaterials" FromRole="RawMaterialUsesLogs" ToRole="RawMaterials" />
   </EntityType>
+  <EntityType Name="RegistrationRequestLog">
+    <Key>
+      <PropertyRef Name="LogId" />
+    </Key>
+    <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="SupportUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
   <EntityType Name="RegistrationRequest">
     <Key>
       <PropertyRef Name="RegistrationId" />
@@ -169,10 +180,10 @@
     <Key>
       <PropertyRef Name="RequestId" />
     </Key>
-    <Property Name="RequestId" Type="Int32" Nullable="false" />
+    <Property Name="RequestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="RequestSubject" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="RequestBody" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="SenderUserName" Type="Int32" Nullable="false" />
+    <Property Name="SenderUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
   <EntityType Name="SupplierLog">
@@ -181,8 +192,8 @@
     </Key>
     <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="Time" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="Comment" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="Comment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="ScheduleId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="SupplierSchedule" Relationship="Self.FK_SupplierLog_SupplierSchedules" FromRole="SupplierLog" ToRole="SupplierSchedules" />
   </EntityType>
@@ -196,6 +207,18 @@
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="SupplierLogs" Relationship="Self.FK_SupplierLog_SupplierSchedules" FromRole="SupplierSchedules" ToRole="SupplierLog" />
+  </EntityType>
+  <EntityType Name="SupportLog">
+    <Key>
+      <PropertyRef Name="LogId" />
+    </Key>
+    <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RequestSubject" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RequestBody" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SenderUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="SupportUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -218,14 +241,14 @@
     <Property Name="UnitPrice" Type="Double" Nullable="false" />
     <Property Name="Quantity" Type="Int32" Nullable="false" />
     <Property Name="ProductPicture" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="VendorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="VendorId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Vendor" Relationship="Self.FK_VendorProducts_Vendors" FromRole="VendorProducts" ToRole="Vendors" />
   </EntityType>
   <EntityType Name="Vendor">
     <Key>
       <PropertyRef Name="VendorId" />
     </Key>
-    <Property Name="VendorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="VendorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="VendorName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
@@ -298,10 +321,12 @@
     <EntitySet Name="Notices" EntityType="Self.Notice" />
     <EntitySet Name="RawMaterials" EntityType="Self.RawMaterial" />
     <EntitySet Name="RawMaterialUsesLogs" EntityType="Self.RawMaterialUsesLog" />
+    <EntitySet Name="RegistrationRequestLogs" EntityType="Self.RegistrationRequestLog" />
     <EntitySet Name="RegistrationRequests" EntityType="Self.RegistrationRequest" />
     <EntitySet Name="RequestToSupports" EntityType="Self.RequestToSupport" />
     <EntitySet Name="SupplierLogs" EntityType="Self.SupplierLog" />
     <EntitySet Name="SupplierSchedules" EntityType="Self.SupplierSchedule" />
+    <EntitySet Name="SupportLogs" EntityType="Self.SupportLog" />
     <EntitySet Name="Users" EntityType="Self.User" />
     <EntitySet Name="VendorProducts" EntityType="Self.VendorProduct" />
     <EntitySet Name="Vendors" EntityType="Self.Vendor" />

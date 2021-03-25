@@ -148,6 +148,7 @@
     <Compile Include="Controllers\EmployeeTextController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogoutController.cs" />
+    <Compile Include="Controllers\SupportController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -197,17 +198,15 @@
     </Compile>
     <Compile Include="Models\EmployeeTextMetaData.cs" />
     <Compile Include="Models\EmployeeTextPartial.cs" />
+    <Compile Include="Models\EmployeeMetaData.cs" />
     <Compile Include="Models\JobCategory.cs">
       <DependentUpon>BusinessERPModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EmployeeMetaData.cs" />
-    <Compile Include="Models\NoticeMetaData.cs" />
-    <Compile Include="Models\NoticePartical.cs" />
-    <Compile Include="Models\UserPartial.cs" />
-    <Compile Include="Models\UserMetaData.cs" />
     <Compile Include="Models\Notice.cs">
       <DependentUpon>BusinessERPModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\NoticeMetaData.cs" />
+    <Compile Include="Models\NoticePartial.cs" />
     <Compile Include="Models\RawMaterial.cs">
       <DependentUpon>BusinessERPModel.tt</DependentUpon>
     </Compile>
@@ -217,6 +216,11 @@
     <Compile Include="Models\RegistrationRequest.cs">
       <DependentUpon>BusinessERPModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RegistrationRequestLog.cs">
+      <DependentUpon>BusinessERPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RegistrationRequestMetaData.cs" />
+    <Compile Include="Models\RegistrationRequestPartial.cs" />
     <Compile Include="Models\RequestToSupport.cs">
       <DependentUpon>BusinessERPModel.tt</DependentUpon>
     </Compile>
@@ -226,9 +230,14 @@
     <Compile Include="Models\SupplierSchedule.cs">
       <DependentUpon>BusinessERPModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SupportLog.cs">
+      <DependentUpon>BusinessERPModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>BusinessERPModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserPartial.cs" />
+    <Compile Include="Models\UserMetaData.cs" />
     <Compile Include="Models\Vendor.cs">
       <DependentUpon>BusinessERPModel.tt</DependentUpon>
     </Compile>
@@ -237,16 +246,28 @@
     </Compile>
     <Compile Include="Models\ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Repositories\EmployeeRepository.cs" />
     <Compile Include="Repositories\EmployeeTextRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\JobCategoryRepository.cs" />
     <Compile Include="Repositories\NoticeRepository.cs" />
+    <Compile Include="Repositories\RegistrationRequestLogRepository.cs" />
+    <Compile Include="Repositories\RegistrationRequestRepository.cs" />
     <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\RequestToSupportRepository.cs" />
+    <Compile Include="Repositories\SupportLogRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Repositories\VendorRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
     <EntityDeploy Include="Models\BusinessERPModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BusinessERPModel.Designer.cs</LastGenOutput>
@@ -254,19 +275,12 @@
     <Content Include="Models\BusinessERPModel.edmx.diagram">
       <DependentUpon>BusinessERPModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
     <None Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Home\Registration.cshtml" />
     <Content Include="Views\Admin\_Layout.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\MyProfile.cshtml" />
@@ -296,6 +310,16 @@
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Views\Home\Registration.cshtml" />
+    <Content Include="Views\Support\_Layout.cshtml" />
+    <Content Include="Views\Support\Index.cshtml" />
+    <Content Include="Views\Support\ViewRegistrationRequest.cshtml" />
+    <Content Include="Views\Support\ViewSupportRequest.cshtml" />
+    <Content Include="Views\Support\CustomerList.cshtml" />
+    <Content Include="Views\Support\VendorList.cshtml" />
+    <Content Include="Views\Support\CustomerDetails.cshtml" />
+    <Content Include="Views\Support\VendorDetails.cshtml" />
+    <Content Include="Views\Support\RRDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

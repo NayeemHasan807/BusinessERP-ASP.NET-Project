@@ -169,7 +169,12 @@ namespace BusinessERP.Controllers
         [HttpGet]
         public ActionResult CreateNewNotice()
         {
-            return View();
+            if (CheckAccess())
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Login", "Home");
         }
         [HttpPost]
         public ActionResult CreateNewNotice(Notice notice)

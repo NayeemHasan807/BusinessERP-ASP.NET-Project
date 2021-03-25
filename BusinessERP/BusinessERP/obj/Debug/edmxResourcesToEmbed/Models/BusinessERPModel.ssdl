@@ -146,6 +146,17 @@
     <Property Name="Date" Type="date" Nullable="false" />
     <Property Name="ManufacturingCost" Type="float" Nullable="false" />
   </EntityType>
+  <EntityType Name="RegistrationRequestLog">
+    <Key>
+      <PropertyRef Name="LogId" />
+    </Key>
+    <Property Name="LogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserType" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="SupportUserName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="RegistrationRequests">
     <Key>
       <PropertyRef Name="RegistrationId" />
@@ -165,10 +176,10 @@
     <Key>
       <PropertyRef Name="RequestId" />
     </Key>
-    <Property Name="RequestId" Type="int" Nullable="false" />
+    <Property Name="RequestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="RequestSubject" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="RequestBody" Type="varchar" MaxLength="500" Nullable="false" />
-    <Property Name="SenderUserName" Type="int" Nullable="false" />
+    <Property Name="SenderUserName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="UserType" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="SupplierLog">
@@ -177,8 +188,8 @@
     </Key>
     <Property Name="LogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Date" Type="date" Nullable="false" />
-    <Property Name="Time" Type="nchar" MaxLength="10" Nullable="false" />
-    <Property Name="Comment" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Time" Type="time" Precision="7" Nullable="false" />
+    <Property Name="Comment" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="ScheduleId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="SupplierSchedules">
@@ -190,6 +201,18 @@
     <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Date" Type="date" Nullable="false" />
     <Property Name="Time" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SupportLog">
+    <Key>
+      <PropertyRef Name="LogId" />
+    </Key>
+    <Property Name="LogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RequestSubject" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="RequestBody" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="SenderUserName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserType" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Date" Type="date" Nullable="false" />
+    <Property Name="SupportUserName" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
@@ -212,13 +235,13 @@
     <Property Name="UnitPrice" Type="float" Nullable="false" />
     <Property Name="Quantity" Type="int" Nullable="false" />
     <Property Name="ProductPicture" Type="varchar" MaxLength="200" Nullable="false" />
-    <Property Name="VendorId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="VendorId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Vendors">
     <Key>
       <PropertyRef Name="VendorId" />
     </Key>
-    <Property Name="VendorId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="VendorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="VendorName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
@@ -290,10 +313,12 @@
     <EntitySet Name="Notices" EntityType="Self.Notices" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RawMaterials" EntityType="Self.RawMaterials" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RawMaterialUsesLogs" EntityType="Self.RawMaterialUsesLogs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RegistrationRequestLog" EntityType="Self.RegistrationRequestLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RegistrationRequests" EntityType="Self.RegistrationRequests" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RequestToSupports" EntityType="Self.RequestToSupports" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SupplierLog" EntityType="Self.SupplierLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SupplierSchedules" EntityType="Self.SupplierSchedules" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SupportLog" EntityType="Self.SupportLog" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VendorProducts" EntityType="Self.VendorProducts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Vendors" EntityType="Self.Vendors" Schema="dbo" store:Type="Tables" />

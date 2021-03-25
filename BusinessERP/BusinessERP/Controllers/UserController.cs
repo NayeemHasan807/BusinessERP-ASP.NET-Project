@@ -28,6 +28,10 @@ namespace BusinessERP.Controllers
                         {
                             return RedirectToAction("Index", "Admin");
                         }
+                        else if (Session["UserType"].ToString() == "Support")
+                        {
+                            return RedirectToAction("Index", "Support");
+                        }
                         else
                         {
                             TempData["Error"] = "You dont have permission to access on the site at this moment.";

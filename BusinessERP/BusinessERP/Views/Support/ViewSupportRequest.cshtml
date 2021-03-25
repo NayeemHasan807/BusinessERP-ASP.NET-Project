@@ -1,0 +1,55 @@
+﻿@model IEnumerable<BusinessERP.Models.RequestToSupport>
+
+@{
+    ViewBag.Title = "ViewSupportRequest";
+    Layout = "~/Views/Support/_Layout.cshtml";
+}
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<h2>Support Requests</h2>
+<br />
+<div>
+    <table class="table" id="view">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RequestSubject)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RequestBody)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SenderUserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserType)
+            </th>
+            <th>Action</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequestSubject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequestBody)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SenderUserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserType)
+        </td>
+        <td>
+            <a href="/Support/MakeAsChecked/@item.RequestId" class="btn btn-outline-success">Make-As-Checked</a>
+        </td>
+    </tr>
+        }
+
+    </table>
+</div>
+<a href="/Support/Index">
+    <button type="button">
+        Back
+    </button>
+</a>
