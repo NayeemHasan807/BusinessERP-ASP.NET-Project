@@ -1,0 +1,41 @@
+﻿@model BusinessERP.Models.Notice
+
+@{
+    ViewBag.Title = "CreateNewNotice";
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+
+<h2>New Notice</h2>
+<br />
+<form method="post">
+    Receiver Type:<br />
+    <select name="ReceiverType">
+        <option value="All">All</option>
+        <option value="Employee">Employee</option>
+        <option value="Customer">Customer</option>
+        <option value="Vendor">Vendor</option>
+    </select><br />
+    <div>
+        <span style="color:red;background-color:white">
+            @Html.ValidationMessageFor(model => model.ReceiverType, "", new { @class = "text-danger" })
+        </span>
+    </div>
+    Notice Title:<br />
+    <input type="text" name="NoticeTitle" value="@TempData["NoticeTitle"]"><br />
+    <div>
+        <span style="color:red;background-color:white">
+            @Html.ValidationMessageFor(model => model.NoticeTitle, "", new { @class = "text-danger" })
+        </span>
+    </div>
+    Body:<br />
+         <textarea rows="5" cols="80" name="NoticeBody">@TempData["NoticeBody"]</textarea><br />
+    <div>
+        <span style="color:red;background-color:white">
+            @Html.ValidationMessageFor(model => model.NoticeBody, "", new { @class = "text-danger" })
+        </span>
+    </div>
+    <input type="submit" value="Send">
+    <input type="reset">
+    <div></div>
+</form>
+

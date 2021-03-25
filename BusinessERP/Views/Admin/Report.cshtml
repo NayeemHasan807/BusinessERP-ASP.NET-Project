@@ -1,0 +1,38 @@
+﻿@model BusinessERP.Models.Employee
+
+@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+
+<h2>Report</h2>
+<br />
+<div style="border:solid">
+    <i class="fas fa-chart-bar">
+        <h3>User Report</h3>
+        <a href="/Admin/UserReport">
+            <button type="button">
+                View
+            </button>
+        </a>
+    </i>
+</div>
+<br />
+<div style="border:solid">
+    <i class="fas fa-chart-bar">
+        <h3>Finance Report</h3>
+        <a href="/Admin/FinanceReport">
+            <button type="button">
+                View
+            </button>
+        </a>
+    </i>
+</div>
+<br />
+<div>
+    <a href="/Admin/Index">
+        <button type="button">
+            Back
+        </button>
+    </a>
+</div>

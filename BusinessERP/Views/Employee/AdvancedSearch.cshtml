@@ -1,0 +1,116 @@
+﻿@model IEnumerable<BusinessERP.Models.Employee>
+
+@{
+    ViewBag.Title = "AdvancedSearch";
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+
+<h2>AdvancedSearch</h2>
+<br />
+<form method="post">
+    <div>
+        <i class="fas fa-search">
+            <input type="text" id="searchkey" name="searchkey" placeholder="Search employee by name" value="@TempData["searchkey"]" />
+            Name Order:
+            <select name="order">
+                @if (TempData["order"] != null)
+                {
+                    <option value="Ascending" @if (TempData["order"].ToString() == "Ascending") { var s = "selected"; @s}>A-Z</option>
+                    <option value="Descending" @if (TempData["order"].ToString() == "Descending") { var s = "selected"; @s}>Z-A</option>
+                }
+                else
+                {
+                    <option value="Ascending">A-Z</option>
+                    <option value="Descending">Z-A</option>
+                }
+            </select>
+            Job Category:
+            <select name="category">
+                <option value="0"
+                        @if (TempData["category"] != null) { var i = 0; if ((int)TempData["category"] == i) { var s = "selected"; @s ; } }>
+                    All
+                </option>
+                @foreach (var item in TempData["JobCategory"] as IList<BusinessERP.Models.JobCategory>)
+                {
+                    if (TempData["category"] != null)
+                    {
+                        if ((int)TempData["category"] == item.JobId)
+                        {
+                            <option value="@item.JobId" selected>@item.JobTitle</option>
+                            continue;
+                        }
+                    }
+                    <option value="@item.JobId">@item.JobTitle</option>
+                }
+            </select>
+            <input type="submit" value="Search" />
+        </i>
+    </div>
+</form>
+@if (Model != null)
+{
+    <table id="view">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JoiningDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProfilePicture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JoiningDate)
+                </td>
+                <td>
+                    <img src=@Url.Content(item.ProfilePicture) alt="Avater" width="50" height="50" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+<a href="/Admin/Index">
+    <button type="button">
+        Back
+    </button>
+</a>
