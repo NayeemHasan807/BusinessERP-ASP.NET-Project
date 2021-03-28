@@ -331,6 +331,8 @@
     <Content Include="Views\Profile\Index.cshtml" />
     <Content Include="Views\Profile\ChangePassword.cshtml" />
     <Content Include="Views\Profile\UpdateProfile.cshtml" />
+    <Content Include="Views\Support\ViewNotice.cshtml" />
+    <Content Include="Views\Support\CreateNewNotice.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

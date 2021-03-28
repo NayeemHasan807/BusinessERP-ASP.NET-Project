@@ -18,7 +18,8 @@ namespace BusinessERP.Controllers
         private VendorRepository vendorrepo = new VendorRepository();
         private RegistrationRequestLogRepository rrlogrepo = new RegistrationRequestLogRepository();
         private SupportLogRepository suplogrepo = new SupportLogRepository();
-        
+        private NoticeRepository noticerepo = new NoticeRepository();
+
         //Support access check
         public bool CheckAccess()
         {
@@ -325,6 +326,48 @@ namespace BusinessERP.Controllers
                     value.Add(log.Where(c=>c.SupportUserName==Session["UserName"].ToString()).Count(x => x.UserType == item));
                 }
                 return Json(new { category, value}, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
+        [HttpGet]
+        public ActionResult CreateNewNotice()
+        {
+            if (CheckAccess())
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
+        [HttpPost]
+        public ActionResult CreateNewNotice(Notice notice)
+        {
+            if (CheckAccess())
+            {
+                if (ModelState.IsValid)
+                {
+                    noticerepo.Insert(notice);
+                    TempData["NoticeAddConf"] = "Your notice is sent!";
+                    return View();
+                }
+                else
+                {
+                    TempData["NoticeTitle"] = notice.NoticeTitle;
+                    TempData["NoticeBody"] = notice.NoticeBody;
+                    return View();
+                }
+            }
+            else
+                return RedirectToAction("Login", "Home");
+
+        }
+        [HttpGet]
+        public ActionResult ViewNotice()
+        {
+            if (CheckAccess())
+            {
+                return View(noticerepo.GetAll().Where(x=>x.ReceiverType=="All" || x.ReceiverType=="Employee"));
             }
             else
                 return RedirectToAction("Login", "Home");

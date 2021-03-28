@@ -1,0 +1,38 @@
+﻿@model IEnumerable<BusinessERP.Models.Notice>
+
+@{
+    ViewBag.Title = "ViewNotice";
+    Layout = "~/Views/Support/_Layout.cshtml";
+}
+
+<h2>Notices</h2>
+<br />
+<table id="view">
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Details
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoticeTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoticeBody)
+            </td>
+        </tr>
+    }
+</table>
+<div>
+    <a href="/Support/Index">
+        <button type="button">
+            Back
+        </button>
+    </a>
+</div>
