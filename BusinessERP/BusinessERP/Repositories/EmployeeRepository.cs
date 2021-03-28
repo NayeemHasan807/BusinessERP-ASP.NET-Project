@@ -65,8 +65,6 @@ namespace BusinessERP.Repositories
                     return list4;
                 }
             }
-            
-            
         }
     }
 }

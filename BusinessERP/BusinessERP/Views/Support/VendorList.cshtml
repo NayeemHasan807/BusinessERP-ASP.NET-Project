@@ -7,6 +7,27 @@
 <link href="~/Content/bootstrap.css" rel="stylesheet" />
 <h2>Vendor List</h2>
 <br />
+<form method="post">
+    <i class="fas fa-search">
+        <input type="text" id="searchkey" name="searchkey" placeholder="Search vendor by name" value="@TempData["searchkey"]" />
+        <select name="status">
+            @if (TempData["status"] != null)
+            {
+                <option value="All" @if (TempData["status"].ToString() == "All") { var s = "selected"; @s }>All</option>
+                <option value="Active" @if (TempData["status"].ToString() == "Active") { var s = "selected"; @s }>Active</option>
+                <option value="Blocked" @if (TempData["status"].ToString() == "Blocked") { var s = "selected"; @s }>Blocked</option>
+            }
+            else
+            {
+                <option value="All">All</option>
+                <option value="Active">Active</option>
+                <option value="Blocked">Blocked</option>
+            }
+        </select>
+        <input type="submit" value="Search" />
+    </i>   
+</form>
+<br />
 <div>
     <table class="table" id="view">
         <tr>

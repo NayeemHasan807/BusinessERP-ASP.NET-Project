@@ -306,7 +306,6 @@
     <Content Include="Views\EmployeeText\Delete.cshtml" />
     <Content Include="Views\EmployeeText\Create.cshtml" />
     <Content Include="Views\EmployeeText\Reply.cshtml" />
-    <Content Include="Views\Employee\Search.cshtml" />
     <Content Include="Views\Employee\AdvancedSearch.cshtml" />
     <Content Include="Views\Admin\Report.cshtml" />
     <Content Include="Views\Admin\UserReport.cshtml" />

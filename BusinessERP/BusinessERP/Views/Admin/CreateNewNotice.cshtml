@@ -28,7 +28,7 @@
         </span>
     </div>
     Body:<br />
-         <textarea rows="5" cols="80" name="NoticeBody">@TempData["NoticeBody"]</textarea><br />
+    <textarea rows="5" cols="80" name="NoticeBody">@TempData["NoticeBody"]</textarea><br />
     <div>
         <span style="color:red;background-color:white">
             @Html.ValidationMessageFor(model => model.NoticeBody, "", new { @class = "text-danger" })
@@ -36,6 +36,11 @@
     </div>
     <input type="submit" value="Send">
     <input type="reset">
+    <a href="/Admin/Index">
+        <button type="button">
+            Back
+        </button>
+    </a>
     <div></div>
 </form>
 

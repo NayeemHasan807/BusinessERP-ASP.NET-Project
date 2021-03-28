@@ -81,6 +81,19 @@ namespace BusinessERP.Controllers
             else
                 return RedirectToAction("Login", "Home");
         }
+        [HttpPost]
+        public ActionResult CustomerList(FormCollection collection)
+        {
+            if (CheckAccess())
+            {
+                TempData["searchkey"] = collection["searchkey"];
+                TempData["status"] = collection["status"];
+                List<Customer> data = customerrepo.GetBySearch(collection["searchkey"], collection["status"]);
+                return View(data);
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
         [HttpGet]
         public ActionResult CustomerDetails(int id)
         {
@@ -133,6 +146,19 @@ namespace BusinessERP.Controllers
             if (CheckAccess())
             {
                 return View(vendorrepo.GetAll());
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
+        [HttpPost]
+        public ActionResult VendorList(FormCollection collection)
+        {
+            if (CheckAccess())
+            {
+                TempData["searchkey"] = collection["searchkey"];
+                TempData["status"] = collection["status"];
+                List<Vendor> data = vendorrepo.GetBySearch(collection["searchkey"], collection["status"]);
+                return View(data);
             }
             else
                 return RedirectToAction("Login", "Home");
