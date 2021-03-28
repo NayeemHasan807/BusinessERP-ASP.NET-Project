@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace BusinessERP.Controllers
 {
-    public class LogoutController : Controller
+    public class LogoutController : BaseController
     {
         [HttpGet]
         public ActionResult Index()

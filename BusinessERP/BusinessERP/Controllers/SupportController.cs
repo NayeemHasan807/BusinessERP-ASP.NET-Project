@@ -214,7 +214,7 @@ namespace BusinessERP.Controllers
                 rrlogdata.UserType = request.UserType;
                 rrlogdata.SupportUserName = Session["UserName"].ToString();
                 rrlogdata.Date = DateTime.Now;
-                rrlogdata.Status = "Rejected";
+                rrlogdata.Status = "Accepted";
 
                 var userdata = new User();
                 userdata.UserName = request.UserName;
@@ -257,6 +257,74 @@ namespace BusinessERP.Controllers
                 rrlogrepo.Insert(rrlogdata);
                 rrrepo.Delete(id);
                 return RedirectToAction("ViewRegistrationRequest");
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
+
+        //Support Reports
+        [HttpGet]
+        public ActionResult Report()
+        {
+            if (CheckAccess())
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
+        [HttpGet]
+        public ActionResult RegistrationLogReport()
+        {
+            if (CheckAccess())
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
+        [HttpPost]
+        public ActionResult RegistrationLogBarChart()
+        {
+            if (CheckAccess())
+            {
+                var log = rrlogrepo.GetAll();
+                var category = log.Select(x => x.UserType).Distinct();
+                List<int> acceptedvalue = new List<int>();
+                List<int> rejectedvalue = new List<int>();
+                foreach (var item in category)
+                {
+                    acceptedvalue.Add(log.Where(c=>c.Status=="Accepted").Where(c => c.SupportUserName == Session["UserName"].ToString()).Count(x => x.UserType == item));
+                    rejectedvalue.Add(log.Where(c => c.Status == "Rejected").Where(c => c.SupportUserName == Session["UserName"].ToString()).Count(x => x.UserType == item));
+                }
+                return Json(new { category, acceptedvalue , rejectedvalue }, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
+        [HttpGet]
+        public ActionResult SupportLogReport()
+        {
+            if (CheckAccess())
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
+        [HttpPost]
+        public ActionResult SupportLogPieChart()
+        {
+            if (CheckAccess())
+            {
+                var log = suplogrepo.GetAll();
+                var category = log.Select(x => x.UserType).Distinct();
+                List<int> value = new List<int>();
+                foreach (var item in category)
+                {
+                    value.Add(log.Where(c=>c.SupportUserName==Session["UserName"].ToString()).Count(x => x.UserType == item));
+                }
+                return Json(new { category, value}, JsonRequestBehavior.AllowGet);
             }
             else
                 return RedirectToAction("Login", "Home");

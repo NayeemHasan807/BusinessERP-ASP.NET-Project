@@ -8,5 +8,9 @@ namespace BusinessERP.Repositories
 {
     public class CustomerRepository:Repository<Customer>
     {
+        public Customer GetByUserName(string username)
+        {
+            return context.Customers.Where(x => x.UserName == username).FirstOrDefault();
+        }
     }
 }

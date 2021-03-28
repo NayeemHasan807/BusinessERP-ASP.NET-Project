@@ -47,5 +47,7 @@ namespace BusinessERP.Models
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<VendorProduct> VendorProducts { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
+
+        public System.Data.Entity.DbSet<BusinessERP.Models.ViewModels.ProfileViewModel> ProfileViewModels { get; set; }
     }
 }
