@@ -24,6 +24,14 @@
     <Property Name="UnitPrice" Type="float" Nullable="false" />
     <Property Name="Total" Type="float" Nullable="false" />
   </EntityType>
+  <EntityType Name="CompanyProductCategories">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Discriptions" Type="varchar" MaxLength="500" Nullable="false" />
+  </EntityType>
   <EntityType Name="CompanyProducts">
     <Key>
       <PropertyRef Name="ProductId" />
@@ -35,7 +43,7 @@
     <Property Name="UnitPrice" Type="float" Nullable="false" />
     <Property Name="Quantity" Type="int" Nullable="false" />
     <Property Name="ProductPicture" Type="varchar" MaxLength="200" Nullable="false" />
-    <Property Name="ManufacturingDate" Type="date" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="CustomerInvoices">
     <Key>
@@ -251,6 +259,18 @@
     <Property Name="ProfilePicture" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Status" Type="varchar" MaxLength="100" Nullable="false" />
   </EntityType>
+  <Association Name="FK_CompanyProducts_CompanyProductCategories">
+    <End Role="CompanyProductCategories" Type="Self.CompanyProductCategories" Multiplicity="1" />
+    <End Role="CompanyProducts" Type="Self.CompanyProducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CompanyProductCategories">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="CompanyProducts">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Employees_JobCategories">
     <End Role="JobCategories" Type="Self.JobCategories" Multiplicity="1" />
     <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
@@ -302,6 +322,7 @@
   <EntityContainer Name="BusinessERPModelStoreContainer">
     <EntitySet Name="CompanyInvoices" EntityType="Self.CompanyInvoices" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CompanyLineItems" EntityType="Self.CompanyLineItems" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CompanyProductCategories" EntityType="Self.CompanyProductCategories" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CompanyProducts" EntityType="Self.CompanyProducts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CustomerInvoices" EntityType="Self.CustomerInvoices" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CustomerLineItems" EntityType="Self.CustomerLineItems" Schema="dbo" store:Type="Tables" />
@@ -322,6 +343,10 @@
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VendorProducts" EntityType="Self.VendorProducts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Vendors" EntityType="Self.Vendors" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CompanyProducts_CompanyProductCategories" Association="Self.FK_CompanyProducts_CompanyProductCategories">
+      <End Role="CompanyProductCategories" EntitySet="CompanyProductCategories" />
+      <End Role="CompanyProducts" EntitySet="CompanyProducts" />
+    </AssociationSet>
     <AssociationSet Name="FK_Employees_JobCategories" Association="Self.FK_Employees_JobCategories">
       <End Role="JobCategories" EntitySet="JobCategories" />
       <End Role="Employees" EntitySet="Employees" />

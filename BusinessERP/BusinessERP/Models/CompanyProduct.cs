@@ -21,6 +21,8 @@ namespace BusinessERP.Models
         public double UnitPrice { get; set; }
         public int Quantity { get; set; }
         public string ProductPicture { get; set; }
-        public System.DateTime ManufacturingDate { get; set; }
+        public int CategoryId { get; set; }
+    
+        public virtual CompanyProductCategory CompanyProductCategory { get; set; }
     }
 }

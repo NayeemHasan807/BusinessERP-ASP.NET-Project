@@ -31,6 +31,11 @@
                            string path = "/Support/Index";
                            @path;
                        }
+                       else if(@Session["UserType"].ToString() == "Customer")
+                       {
+                           string path = "/Customer/Index";
+                           @path;
+                       }
                        "><i class="fas fa-arrow-left"></i>Back</a>
                 </li>
                 <li><a href="/Profile/Index"><i class="fas fa-user"></i>My Profile</a></li>

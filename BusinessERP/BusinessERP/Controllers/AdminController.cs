@@ -16,6 +16,7 @@ namespace BusinessERP.Controllers
         private JobCategoryRepository jobcatrepo = new JobCategoryRepository();
         private UserRepository userrepo = new UserRepository();
         private NoticeRepository noticerepo = new NoticeRepository();
+        private CompanyProductRepository comprodrepo = new CompanyProductRepository();
         //Check access to admin actions
         public bool CheckAccess()
         {
@@ -30,6 +31,8 @@ namespace BusinessERP.Controllers
         {
             if (CheckAccess())
             {
+                ViewData["StockOut"] = comprodrepo.StockOut();
+                ViewData["LowStock"] = comprodrepo.LowStock();
                 TempData["Profile"] = employeerepo.GetByUserName(Session["UserName"].ToString());
                 return View();
             }

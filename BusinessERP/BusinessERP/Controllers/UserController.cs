@@ -14,7 +14,7 @@ namespace BusinessERP.Controllers
         [HttpPost]
         public ActionResult Login(FormCollection collection)
         {
-            if(collection["UserName"]!="" & collection["Password"]!="")
+            if(collection["UserName"]!=null & collection["Password"]!=null)
             {
                 var user = userrepo.GetByUserName(collection["UserName"]);
                 if(user!=null)
@@ -23,6 +23,7 @@ namespace BusinessERP.Controllers
                     {
                         Session["UserName"] = collection["UserName"];
                         Session["UserType"] = user.UserType;
+                        Session["Status"] = user.UserStatus;
                         Session["LoginStatus"] = "Ok";
                         if(Session["UserType"].ToString() == "Admin")
                         {
@@ -31,6 +32,18 @@ namespace BusinessERP.Controllers
                         else if (Session["UserType"].ToString() == "Support")
                         {
                             return RedirectToAction("Index", "Support");
+                        }
+                        else if (Session["UserType"].ToString() == "Customer")
+                        {
+                            if(Session["Status"].ToString() == "Active")
+                            {
+                                return RedirectToAction("Index", "Customer");
+                            }
+                            else
+                            {
+                                TempData["Error"] = "Your account is temporarily blocked. Please contact with our support team.";
+                                return RedirectToAction("Login", "Home");
+                            }
                         }
                         else
                         {

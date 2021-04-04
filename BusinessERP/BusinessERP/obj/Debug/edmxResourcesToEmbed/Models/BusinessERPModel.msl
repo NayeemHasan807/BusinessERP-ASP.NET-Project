@@ -27,6 +27,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CompanyProductCategories">
+      <EntityTypeMapping TypeName="BusinessERPModel.CompanyProductCategory">
+        <MappingFragment StoreEntitySet="CompanyProductCategories">
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="Discriptions" ColumnName="Discriptions" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="CompanyProducts">
       <EntityTypeMapping TypeName="BusinessERPModel.CompanyProduct">
         <MappingFragment StoreEntitySet="CompanyProducts">
@@ -37,7 +46,7 @@
           <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="ProductPicture" ColumnName="ProductPicture" />
-          <ScalarProperty Name="ManufacturingDate" ColumnName="ManufacturingDate" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

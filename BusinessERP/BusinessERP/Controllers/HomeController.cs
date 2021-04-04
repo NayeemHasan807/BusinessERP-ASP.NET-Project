@@ -13,6 +13,12 @@ namespace BusinessERP.Controllers
     {
         private UserRepository userrepo = new UserRepository();
         private RegistrationRequestRepository rrrepo = new RegistrationRequestRepository();
+        private CompanyProductRepository comprodrepo = new CompanyProductRepository();
+        [HttpGet]
+        public ActionResult Products()
+        {
+            return View(comprodrepo.GetAll());
+        }
 
         [HttpGet]
         public ActionResult Index()

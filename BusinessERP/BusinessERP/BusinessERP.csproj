@@ -114,6 +114,32 @@
     <Content Include="Content\CSS\VerticalNavBarStyle.css" />
     <Content Include="Content\CSS\Style.css" />
     <Content Include="Content\Images\Home\view1.jpg" />
+    <Content Include="Content\Images\Payments\mastercard.png" />
+    <Content Include="Content\Images\Payments\paypal.png" />
+    <Content Include="Content\Images\Payments\visa.png" />
+    <Content Include="Content\Images\Product\arm1.jpg" />
+    <Content Include="Content\Images\Product\blacklight1.jpg" />
+    <Content Include="Content\Images\Product\cat1.jpg" />
+    <Content Include="Content\Images\Product\cool1.jpg" />
+    <Content Include="Content\Images\Product\fog1.jpg" />
+    <Content Include="Content\Images\Product\fogjuice1.jpg" />
+    <Content Include="Content\Images\Product\frank1.jpg" />
+    <Content Include="Content\Images\Product\freddy1.jpg" />
+    <Content Include="Content\Images\Product\head1.jpg" />
+    <Content Include="Content\Images\Product\head2.jpg" />
+    <Content Include="Content\Images\Product\hippie1.jpg" />
+    <Content Include="Content\Images\Product\jarjar1.jpg" />
+    <Content Include="Content\Images\Product\martian1.jpg" />
+    <Content Include="Content\Images\Product\mummy1.jpg" />
+    <Content Include="Content\Images\Product\powers1.jpg" />
+    <Content Include="Content\Images\Product\rat1.jpg" />
+    <Content Include="Content\Images\Product\rat2.jpg" />
+    <Content Include="Content\Images\Product\skel1.jpg" />
+    <Content Include="Content\Images\Product\skullfog1.jpg" />
+    <Content Include="Content\Images\Product\strobe1.jpg" />
+    <Content Include="Content\Images\Product\superman1.jpg" />
+    <Content Include="Content\Images\Product\tlm1.jpg" />
+    <Content Include="Content\Images\Product\vader1.jpg" />
     <Content Include="Content\JS\Admin\UserBarChart.js" />
     <Content Include="Content\JS\Support\RegistrationLogBarChart.js" />
     <Content Include="Content\ProfilePictures\1C6A1275.111.jpg" />
@@ -146,6 +172,8 @@
     <Content Include="Content\JS\Support\SupportLogPieChart.js" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CompanyProductController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\EmployeeTextController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -178,6 +206,9 @@
       <DependentUpon>BusinessERPModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CompanyProduct.cs">
+      <DependentUpon>BusinessERPModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CompanyProductCategory.cs">
       <DependentUpon>BusinessERPModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Customer.cs">
@@ -250,6 +281,7 @@
     <Compile Include="Models\ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CompanyProductRepository.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Repositories\EmployeeRepository.cs" />
     <Compile Include="Repositories\EmployeeTextRepository.cs" />
@@ -287,9 +319,6 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Admin\_Layout.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\MyProfile.cshtml" />
-    <Content Include="Views\Admin\ChangePassword.cshtml" />
-    <Content Include="Views\Admin\UpdateProfile.cshtml" />
     <Content Include="Views\Admin\CreateNewNotice.cshtml" />
     <Content Include="Views\Admin\ViewAllNotice.cshtml" />
     <Content Include="Views\Admin\NoticeDetails.cshtml" />
@@ -332,6 +361,13 @@
     <Content Include="Views\Profile\UpdateProfile.cshtml" />
     <Content Include="Views\Support\ViewNotice.cshtml" />
     <Content Include="Views\Support\CreateNewNotice.cshtml" />
+    <Content Include="Views\Customer\_Layout.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\CompanyProduct\Index.cshtml" />
+    <Content Include="Views\CompanyProduct\Home.cshtml" />
+    <Content Include="Views\CompanyProduct\StockOut.cshtml" />
+    <Content Include="Views\CompanyProduct\LowStock.cshtml" />
+    <Content Include="Views\Home\Products.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<BusinessERP.Models.CompanyProduct>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Customer/_Layout.cshtml";
+}
+
+<h2>Products</h2>
+
+<table class="table" id="view">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductPicture)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShortDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>Action</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <img src=@Url.Content(item.ProductPicture) alt="Avater" width="50" height="50" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShortDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.ProductId }) |
+            @Html.ActionLink("Add To Cart", "AddToCart", new { id=item.ProductId })
+        </td>
+    </tr>
+}
+
+</table>

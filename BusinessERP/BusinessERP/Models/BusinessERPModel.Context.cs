@@ -27,6 +27,7 @@ namespace BusinessERP.Models
     
         public virtual DbSet<CompanyInvoice> CompanyInvoices { get; set; }
         public virtual DbSet<CompanyLineItem> CompanyLineItems { get; set; }
+        public virtual DbSet<CompanyProductCategory> CompanyProductCategories { get; set; }
         public virtual DbSet<CompanyProduct> CompanyProducts { get; set; }
         public virtual DbSet<CustomerInvoice> CustomerInvoices { get; set; }
         public virtual DbSet<CustomerLineItem> CustomerLineItems { get; set; }
@@ -47,7 +48,5 @@ namespace BusinessERP.Models
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<VendorProduct> VendorProducts { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
-
-        public System.Data.Entity.DbSet<BusinessERP.Models.ViewModels.ProfileViewModel> ProfileViewModels { get; set; }
     }
 }
