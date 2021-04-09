@@ -50,3 +50,4 @@ H:\AIUB\10th semester\ADVANCED PROGRAMMING WITH .NET [A]\MidTerm Project\Project
 H:\AIUB\10th semester\ADVANCED PROGRAMMING WITH .NET [A]\MidTerm Project\ProjectCode\Code\BusinessERP\BusinessERP\obj\Debug\BusinessERP.csproj.CopyComplete
 H:\AIUB\10th semester\ADVANCED PROGRAMMING WITH .NET [A]\MidTerm Project\ProjectCode\Code\BusinessERP\BusinessERP\obj\Debug\BusinessERP.dll
 H:\AIUB\10th semester\ADVANCED PROGRAMMING WITH .NET [A]\MidTerm Project\ProjectCode\Code\BusinessERP\BusinessERP\obj\Debug\BusinessERP.pdb
+H:\AIUB\10th semester\ADVANCED PROGRAMMING WITH .NET [A]\MidTerm Project\ProjectCode\Code\BusinessERP\BusinessERP\obj\Debug\BusinessERP.csprojAssemblyReference.cache

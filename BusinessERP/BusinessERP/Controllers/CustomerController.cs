@@ -1,4 +1,5 @@
 ﻿using BusinessERP.Models;
+using BusinessERP.Models.ViewModels;
 using BusinessERP.Repositories;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace BusinessERP.Controllers
     {
         private CompanyProductRepository comprodrepo = new CompanyProductRepository();
         private CustomerRepository customerrepo = new CustomerRepository();
+        private CustomerInvoiceRepository cusinvrepo = new CustomerInvoiceRepository();
+        private CustomerLineItemRepository cuslirepo = new CustomerLineItemRepository();
         //Check function access of customer
         public bool CheckIfCustomer()
         {
@@ -136,6 +139,61 @@ namespace BusinessERP.Controllers
                 {
                     TempData["Error"] = "Can't be empty and Quentity must be in between 1 to available quantities";
                     return RedirectToAction("EditQuantity", "Customer", new { id = product.ProductId });
+                }
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
+        //Customer Checkout
+        [HttpGet]
+        public ActionResult Checkout()
+        {
+            if (CheckIfCustomer())
+            {
+                TempData["Checkout"] = customerrepo.CheckoutDetails();
+                return View();
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
+        [HttpPost]
+        public ActionResult Checkout(CustomerInvoice invoice)
+        {
+            if (CheckIfCustomer())
+            {
+                if(ModelState.IsValid)
+                {
+                    CheckoutViewModel checkoutDetails = customerrepo.CheckoutDetails();
+                    invoice.SubTotal = checkoutDetails.TotalPrice;
+                    invoice.TotalWithTax = checkoutDetails.TotalPriceWithTax;
+                    invoice.CustomerUserName = Session["UserName"].ToString();
+                    cusinvrepo.Insert(invoice);
+                    CustomerInvoice lastinvoice=null; 
+                    foreach(var item in cusinvrepo.GetAll())
+                    {
+                        lastinvoice = item;
+                    }
+                    foreach(var item in checkoutDetails.CartProductList)
+                    {
+                        CustomerLineItem lineItem = new CustomerLineItem();
+                        lineItem.InvoiceId = lastinvoice.InvoiceId;
+                        lineItem.ProductId = item.ProductId;
+                        lineItem.Quantity = item.Quantity;
+                        lineItem.UnitPrice = item.UnitPrice;
+                        lineItem.Total = item.Quantity * item.UnitPrice;
+                        cuslirepo.Insert(lineItem);
+                        CompanyProduct product = comprodrepo.GetById(item.ProductId);
+                        product.Quantity = product.Quantity - item.Quantity;
+                        comprodrepo.Update(product);
+                    }
+                    customerrepo.ClearCart();
+                    return View("Conformation");
+                   
+                }
+                else
+                {
+                    TempData["Checkout"] = customerrepo.CheckoutDetails();
+                    return View(invoice);
                 }
             }
             else

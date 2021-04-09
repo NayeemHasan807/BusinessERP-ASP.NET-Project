@@ -1,4 +1,5 @@
 ﻿using BusinessERP.Models;
+using BusinessERP.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -103,6 +104,27 @@ namespace BusinessERP.Repositories
             cart = objCart as List<CompanyProduct>;
             cart.Where(x => x.ProductId == product.ProductId).FirstOrDefault().Quantity=product.Quantity;
             HttpContext.Current.Session["cart"] = cart;
+        }
+        public CheckoutViewModel CheckoutDetails()
+        {
+            CheckoutViewModel details = new CheckoutViewModel();
+            object objCart = HttpContext.Current.Session["cart"];
+            details.CartProductList = objCart as List<CompanyProduct>;
+            if (details.CartProductList != null)
+            {
+                foreach (var item in details.CartProductList)
+                {
+                    var pfori = item.Quantity * item.UnitPrice;
+                    details.TotalPrice = details.TotalPrice + pfori;
+                }
+                details.TotalPriceWithTax = ((details.TotalPrice * 10) / 100) + details.TotalPrice;
+                return details;
+            }
+            return null;
+        }
+        public void ClearCart()
+        {
+            HttpContext.Current.Session["cart"]=null;
         }
     }
 }
