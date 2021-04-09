@@ -24,24 +24,27 @@ namespace BusinessERP.Controllers
                         Session["UserName"] = collection["UserName"];
                         Session["UserType"] = user.UserType;
                         Session["Status"] = user.UserStatus;
-                        Session["LoginStatus"] = "Ok";
                         if(Session["UserType"].ToString() == "Admin")
                         {
+                            Session["LoginStatus"] = "Ok";
                             return RedirectToAction("Index", "Admin");
                         }
                         else if (Session["UserType"].ToString() == "Support")
                         {
+                            Session["LoginStatus"] = "Ok";
                             return RedirectToAction("Index", "Support");
                         }
                         else if (Session["UserType"].ToString() == "Customer")
                         {
                             if(Session["Status"].ToString() == "Active")
                             {
+                                Session["LoginStatus"] = "Ok";
                                 return RedirectToAction("Index", "Customer");
                             }
                             else
                             {
-                                TempData["Error"] = "Your account is temporarily blocked. Please contact with our support team.";
+                                Session["LoginStatus"] = "Blocked";
+                                TempData["ABError"] = "Your account is temporarily blocked. Please contact with our support team.";
                                 return RedirectToAction("Login", "Home");
                             }
                         }

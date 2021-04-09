@@ -26,11 +26,17 @@
         <br />
         <div style="color:red;background-color:black;width:30.8%;">
             @TempData["Error"]
+            @TempData["ABError"]
             @TempData["P"]
             @if (TempData["P"] != null)
             {
                 <br />
                 <a href="/Home/Registration" style="color:cyan;">Go To Registration</a>
+            }
+            @if(TempData["ABError"]!=null)
+            {
+                <br />
+                <a href="/Home/ContactWithSupportForUnblock" style="color:cyan;">Contact with support</a>
             }
         </div>
     </form>

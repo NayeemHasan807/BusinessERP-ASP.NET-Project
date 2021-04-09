@@ -261,6 +261,8 @@
     <Compile Include="Models\RequestToSupport.cs">
       <DependentUpon>BusinessERPModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RequestToSupportMetaData.cs" />
+    <Compile Include="Models\RequestToSupportPartial.cs" />
     <Compile Include="Models\SupplierLog.cs">
       <DependentUpon>BusinessERPModel.tt</DependentUpon>
     </Compile>
@@ -378,6 +380,8 @@
     <Content Include="Views\Customer\EditQuantity.cshtml" />
     <Content Include="Views\Customer\Checkout.cshtml" />
     <Content Include="Views\Customer\Conformation.cshtml" />
+    <Content Include="Views\Home\ContactWithSupportForUnblock.cshtml" />
+    <Content Include="Views\Home\Conformation.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -14,6 +14,16 @@ namespace BusinessERP.Controllers
         private UserRepository userrepo = new UserRepository();
         private RegistrationRequestRepository rrrepo = new RegistrationRequestRepository();
         private CompanyProductRepository comprodrepo = new CompanyProductRepository();
+        private RequestToSupportRepository rtsrepo = new RequestToSupportRepository();
+        
+        public bool CheckIfBlocked()
+        {
+            if (HttpContext.Session["LoginStatus"].ToString() == "Blocked")
+                return true;
+            else
+                return false;
+        }
+
         [HttpGet]
         public ActionResult Products()
         {
@@ -120,6 +130,35 @@ namespace BusinessERP.Controllers
                 TempData["CPassword"] = CPassword;
                 return View(registration);
             }
+        }
+        [HttpGet]
+        public ActionResult ContactWithSupportForUnblock()
+        {
+            if (CheckIfBlocked())
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
+        [HttpPost]
+        public ActionResult ContactWithSupportForUnblock(RequestToSupport request)
+        {
+            if (CheckIfBlocked())
+            {
+                if (ModelState.IsValid)
+                {
+                    request.SenderUserName = Session["UserName"].ToString();
+                    request.UserType = Session["UserType"].ToString();
+                    rtsrepo.Insert(request);
+                    return View("Conformation");
+                }
+                else
+                    TempData["RequestBody"] = request.RequestBody;
+                    return View();
+            }
+            else
+                return RedirectToAction("Login", "Home");
         }
     }
 }
