@@ -104,13 +104,14 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\c3.css" />
-    <Content Include="Content\c3.min.css" />
     <Content Include="Content\Chart.css" />
     <Content Include="Content\Chart.min.css" />
     <Content Include="Content\CSS\Button.css" />
     <Content Include="Content\CSS\DivBackground.css" />
     <Content Include="Content\CSS\HorizontalNavBarStyle.css" />
+    <Content Include="Content\CSS\Alert.css" />
+    <Content Include="Content\CSS\ProductDetailsView.css" />
+    <Content Include="Content\CSS\ProductListView.css" />
     <Content Include="Content\CSS\VerticalNavBarStyle.css" />
     <Content Include="Content\CSS\Style.css" />
     <Content Include="Content\Images\Home\view1.jpg" />
@@ -158,8 +159,6 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\c3.js" />
-    <Content Include="Scripts\c3.min.js" />
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\d3.js" />
@@ -211,6 +210,8 @@
     <Compile Include="Models\CompanyProductCategory.cs">
       <DependentUpon>BusinessERPModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CompanyProductMetaData.cs" />
+    <Compile Include="Models\CompanyProductPartial.cs" />
     <Compile Include="Models\Customer.cs">
       <DependentUpon>BusinessERPModel.tt</DependentUpon>
     </Compile>
@@ -282,6 +283,8 @@
     <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CompanyProductRepository.cs" />
+    <Compile Include="Repositories\CustomerInvoiceRepository.cs" />
+    <Compile Include="Repositories\CustomerLineItemRepository.cs" />
     <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Repositories\EmployeeRepository.cs" />
     <Compile Include="Repositories\EmployeeTextRepository.cs" />
@@ -364,10 +367,12 @@
     <Content Include="Views\Customer\_Layout.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\CompanyProduct\Index.cshtml" />
-    <Content Include="Views\CompanyProduct\Home.cshtml" />
     <Content Include="Views\CompanyProduct\StockOut.cshtml" />
     <Content Include="Views\CompanyProduct\LowStock.cshtml" />
+    <Content Include="Views\CompanyProduct\ViewProduct.cshtml" />
     <Content Include="Views\Home\Products.cshtml" />
+    <Content Include="Views\Customer\ViewCart.cshtml" />
+    <Content Include="Views\Customer\EditQuantity.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

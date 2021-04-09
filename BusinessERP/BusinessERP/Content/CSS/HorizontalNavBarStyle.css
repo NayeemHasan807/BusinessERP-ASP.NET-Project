@@ -1,14 +1,23 @@
 ﻿body {margin:0;}
 
-.navbar {
+#navbar {
   overflow: hidden;
   background-color: #333;
-  position: fixed;
   top: 0;
-  width: 100%;
+  width: auto;
+  position: relative;
+  display: -ms-flexbox;
+  /* display: flex; */
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: .5rem 1rem;
 }
 
-.navbar a {
+#navbar a {
   float: left;
   display: block;
   color: #f2f2f2;
@@ -18,7 +27,7 @@
   font-size: 17px;
 }
 
-.navbar a:hover {
+#navbar a:hover {
   background: #ddd;
   color: black;
 }

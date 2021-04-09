@@ -1,0 +1,32 @@
+﻿.alert-primary {
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+}
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+.alert {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+user agent stylesheet
+div {
+    display: block;
+}

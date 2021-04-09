@@ -6,7 +6,7 @@ using System.Web;
 
 namespace BusinessERP.Repositories
 {
-    public class CustomerRepository:Repository<Customer>
+    public class CustomerRepository : Repository<Customer>
     {
         public Customer GetByUserName(string username)
         {
@@ -41,6 +41,68 @@ namespace BusinessERP.Repositories
                     return list2;
                 }
             }
+        }
+        public void AddToCart(CompanyProduct product)
+        {
+            List<CompanyProduct> cart;
+            object objCart = HttpContext.Current.Session["cart"];
+            cart = objCart as List<CompanyProduct>;
+            if (cart == null)
+            {
+                cart = new List<CompanyProduct>();
+                HttpContext.Current.Session["cart"] = cart;
+            }
+            if (product.ProductId.ToString() != null)
+            {
+                var pID = product.ProductId;
+                var inCart = cart.Where(x => x.ProductId == pID).FirstOrDefault();
+                if (inCart == null)
+                {
+                    cart.Add(product);
+                    HttpContext.Current.Session["cart"] = cart;
+                }
+                else
+                {
+                    cart.Where(x => x.ProductId == pID).FirstOrDefault().Quantity = cart.Where(x => x.ProductId == pID).FirstOrDefault().Quantity + product.Quantity;
+                    HttpContext.Current.Session["cart"] = cart;
+                }
+            }
+        }
+        public CompanyProduct GetProductFromCart(int id)
+        {
+            List<CompanyProduct> cart;
+            object objCart = HttpContext.Current.Session["cart"];
+            cart = objCart as List<CompanyProduct>;
+            if(cart!=null)
+            {
+                var inCart = cart.Where(x => x.ProductId == id).FirstOrDefault();
+                return inCart;
+            }
+            return null;
+        }
+        public List<CompanyProduct> ViewCart()
+        {
+            List<CompanyProduct> cart;
+            object objCart = HttpContext.Current.Session["cart"];
+            cart = objCart as List<CompanyProduct>;
+            return cart;
+        }
+
+        public void RemoveFromCart(int id)
+        {
+            List<CompanyProduct> cart;
+            object objCart = HttpContext.Current.Session["cart"];
+            cart = objCart as List<CompanyProduct>;
+            cart.Remove(cart.Where(x=>x.ProductId==id).FirstOrDefault());
+            HttpContext.Current.Session["cart"]=cart;
+        }
+        public void EditQuantity(CompanyProduct product)
+        {
+            List<CompanyProduct> cart;
+            object objCart = HttpContext.Current.Session["cart"];
+            cart = objCart as List<CompanyProduct>;
+            cart.Where(x => x.ProductId == product.ProductId).FirstOrDefault().Quantity=product.Quantity;
+            HttpContext.Current.Session["cart"] = cart;
         }
     }
 }

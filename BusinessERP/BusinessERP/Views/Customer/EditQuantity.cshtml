@@ -1,0 +1,46 @@
+﻿@model BusinessERP.Models.CompanyProduct
+
+@{
+    ViewBag.Title = "EditQuantity";
+    Layout = "~/Views/Customer/_Layout.cshtml";
+}
+<link href="~/Content/CSS/ProductDetailsView.css" rel="stylesheet" />
+<div class="container">
+    <!-- Left Column / Image -->
+    <div class="left-column">
+        <img src=@Url.Content(Model.ProductPicture) style="border-radius:0%" />
+    </div>
+    <!-- Right Column -->
+    <div class="right-column" align="left">
+        <!-- Product Description -->
+        <div class="product-description">
+            <span>@Model.ProductName<br /></span>
+            <p>@Model.ShortDescription</p><br />
+            <p>@Model.LongDescription</p><br />
+            <p style="color:green">Available Quantity:  @ViewBag.AQuantity</p>
+        </div>
+        <!-- Product Pricing -->
+        <div class="product-price">
+            <span><p style="color:red">$@Model.UnitPrice</p></span>
+            <p>Quantity:</p>
+            <form method="post" action="/Customer/EditQuantity">
+                <input type="hidden" name="ProductId" value="@Model.ProductId" />
+                <input type="text" name="Quantity" value="@Model.Quantity" />
+                <input type="submit" name="Update" value="Update" />
+                <a href="/Customer/ViewCart">
+                    <button type="button">
+                        Back
+                    </button>
+                </a>
+            </form>
+            @if (TempData["Error"] != null)
+            {
+                <link href="~/Content/CSS/Alert.css" rel="stylesheet" />
+                <div class="alert alert-danger" role="alert">
+                    @TempData["Error"]
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

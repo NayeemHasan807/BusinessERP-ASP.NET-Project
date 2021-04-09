@@ -9,6 +9,7 @@ namespace BusinessERP.Controllers
 {
     public class CompanyProductController : BaseController
     {
+        private CompanyProductRepository comprodrepo = new CompanyProductRepository();
         public bool CheckIfAdmin()
         {
             if (HttpContext.Session["UserType"].ToString() == "Admin")
@@ -23,17 +24,26 @@ namespace BusinessERP.Controllers
             else
                 return false;
         }
-        private CompanyProductRepository comprodrepo = new CompanyProductRepository();
-        [HttpGet]
-        public ActionResult Home()
-        {
-            return View(comprodrepo.GetAll());
-        }
+        
         [HttpGet]
         public ActionResult Index()
         {
-
-            return View(comprodrepo.GetAll());
+            if (CheckIfCustomer())
+            {
+                return View(comprodrepo.GetAll());
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
+        [HttpGet]
+        public ActionResult ViewProduct(int id)
+        {
+            if (CheckIfCustomer())
+            {
+                return View(comprodrepo.GetById(id));
+            }
+            else
+                return RedirectToAction("Login", "Home");
         }
         [HttpGet]
         public ActionResult StockOut()

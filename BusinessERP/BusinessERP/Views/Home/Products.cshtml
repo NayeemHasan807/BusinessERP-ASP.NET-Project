@@ -4,53 +4,238 @@
     ViewBag.Title = "Products";
     Layout = "~/Views/Home/_Layout.cshtml";
 }
-<br />
-<br />
-<link href="~/Content/CSS/Style.css" rel="stylesheet" />
-<table style="background-color:silver" id="view">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductPicture)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ShortDescription)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UnitPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </th>
-        <th>Action</th>
-    </tr>
+@*<br />
+    <br />
+    <link href="~/Content/CSS/Style.css" rel="stylesheet" />
+    <table style="background-color:silver" id="view">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductPicture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShortDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>Action</th>
+        </tr>
 
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src=@Url.Content(item.ProductPicture) alt="Avater" width="50" height="50" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShortDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
+                    @Html.ActionLink("Add To Cart", "AddToCart", new { id = item.ProductId })
+                </td>
+            </tr>
+        }
+
+    </table>*@
+<h2 align="center">All Products</h2>
+<br />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/CSS/ProductListView.css" rel="stylesheet" />
+@{
+    BusinessERP.Models.CompanyProduct a = null;
+    BusinessERP.Models.CompanyProduct b = null;
+    BusinessERP.Models.CompanyProduct c = null;
+    BusinessERP.Models.CompanyProduct d = null;
+    int count = 0;
+}
+<div class="container">
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                <img src=@Url.Content(item.ProductPicture) alt="Avater" width="50" height="50" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShortDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnitPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
-                @Html.ActionLink("Add To Cart", "AddToCart", new { id = item.ProductId })
-            </td>
-        </tr>
+        if (count == 0)
+        {
+            a = item;
+            count++;
+            continue;
+        }
+        else if (count == 1)
+        {
+            b = item;
+            count++;
+            continue;
+        }
+        else if (count == 2)
+        {
+            c = item;
+            count++;
+            continue;
+        }
+        else if (count == 3)
+        {
+            d = item;
+            count++;
+            continue;
+        }
+        else if (count == 4)
+        {
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card">
+                        <img class="image" src=@Url.Content(a.ProductPicture) style="width:100%">
+                        <h4>@Html.DisplayFor(modelItem => a.ProductName)</h4>
+                        <p class="price"> $@Html.DisplayFor(modelItem => a.UnitPrice)</p>
+                        <p class="quantity"> Available Quantity:@Html.DisplayFor(modelItem => a.Quantity)</p>
+                        <p class="body">
+                            @Html.DisplayFor(modelItem => a.LongDescription)<br />
+                        </p>
+                        <p><a href="/Home/ViewProduct/@Html.DisplayFor(modelItem => a.ProductId)"><button>View Product</button></a></p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <img class="image" src=@Url.Content(b.ProductPicture) style="width:100%">
+                        <h4>@Html.DisplayFor(modelItem => b.ProductName)</h4>
+                        <p class="price"> $@Html.DisplayFor(modelItem => b.UnitPrice)</p>
+                        <p class="quantity"> Available Quantity:@Html.DisplayFor(modelItem => b.Quantity)</p>
+                        <p class="body">
+                            @Html.DisplayFor(modelItem => b.LongDescription)<br />
+                        </p>
+                        <p><a href="/Home/ViewProduct/@Html.DisplayFor(modelItem => b.ProductId)"><button>View Product</button></a></p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <img class="image" src=@Url.Content(c.ProductPicture) style="width:100%">
+                        <h4>@Html.DisplayFor(modelItem => c.ProductName)</h4>
+                        <p class="price"> $@Html.DisplayFor(modelItem => c.UnitPrice)</p>
+                        <p class="quantity"> Available Quantity:@Html.DisplayFor(modelItem => c.Quantity)</p>
+                        <p class="body">
+                            @Html.DisplayFor(modelItem => c.LongDescription)<br />
+                        </p>
+                        <p><a href="/Home/ViewProduct/@Html.DisplayFor(modelItem => c.ProductId)"><button>View Product</button></a></p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <img class="image" src=@Url.Content(d.ProductPicture) style="width:100%">
+                        <h4>@Html.DisplayFor(modelItem => d.ProductName)</h4>
+                        <p class="price"> $@Html.DisplayFor(modelItem => d.UnitPrice)</p>
+                        <p class="quantity"> Available Quantity:@Html.DisplayFor(modelItem => d.Quantity)</p>
+                        <p class="body">
+                            @Html.DisplayFor(modelItem => d.LongDescription)<br />
+                        </p>
+                        <p><a href="/Home/ViewProduct/@Html.DisplayFor(modelItem => d.ProductId)"><button>View Product</button></a></p>
+                    </div>
+                </div>
+            </div>
+            <br />
+            a = item;
+            b = null;
+            c = null;
+            d = null;
+            count = 1;
+        }
     }
-
-</table>
-
+    @if (count == 1)
+    {
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <img class="image" src=@Url.Content(a.ProductPicture) style="width:100%">
+                    <h4>@Html.DisplayFor(modelItem => a.ProductName)</h4>
+                    <p class="price"> $@Html.DisplayFor(modelItem => a.UnitPrice)</p>
+                    <p class="quantity"> Available Quantity:@Html.DisplayFor(modelItem => a.Quantity)</p>
+                    <p class="body">
+                        @Html.DisplayFor(modelItem => a.LongDescription)<br />
+                    </p>
+                    <p><a href="/Home/ViewProduct/@Html.DisplayFor(modelItem => a.ProductId)"><button>View Product</button></a></p>
+                </div>
+            </div>
+        </div>
+    }
+    else if (count == 2)
+    {
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <img class="image" src=@Url.Content(a.ProductPicture) style="width:100%">
+                    <h4>@Html.DisplayFor(modelItem => a.ProductName)</h4>
+                    <p class="price"> $@Html.DisplayFor(modelItem => a.UnitPrice)</p>
+                    <p class="quantity"> Available Quantity:@Html.DisplayFor(modelItem => a.Quantity)</p>
+                    <p class="body">
+                        @Html.DisplayFor(modelItem => a.LongDescription)<br />
+                    </p>
+                    <p><a href="/Home/ViewProduct/@Html.DisplayFor(modelItem => a.ProductId)"><button>View Product</button></a></p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img class="image" src=@Url.Content(b.ProductPicture) style="width:100%">
+                    <h4>@Html.DisplayFor(modelItem => b.ProductName)</h4>
+                    <p class="price"> $@Html.DisplayFor(modelItem => b.UnitPrice)</p>
+                    <p class="quantity"> Available Quantity:@Html.DisplayFor(modelItem => b.Quantity)</p>
+                    <p class="body">
+                        @Html.DisplayFor(modelItem => b.LongDescription)<br />
+                    </p>
+                    <p><a href="/Home/ViewProduct/@Html.DisplayFor(modelItem => b.ProductId)"><button>View Product</button></a></p>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <img class="image" src=@Url.Content(a.ProductPicture) style="width:100%">
+                    <h4>@Html.DisplayFor(modelItem => a.ProductName)</h4>
+                    <p class="price"> $@Html.DisplayFor(modelItem => a.UnitPrice)</p>
+                    <p class="quantity"> Available Quantity:@Html.DisplayFor(modelItem => a.Quantity)</p>
+                    <p class="body">
+                        @Html.DisplayFor(modelItem => a.LongDescription)<br />
+                    </p>
+                    <p><a href="/Home/ViewProductDetails/@Html.DisplayFor(modelItem => a.ProductId)"><button>View Product</button></a></p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img class="image" src=@Url.Content(b.ProductPicture) style="width:100%">
+                    <h4>@Html.DisplayFor(modelItem => b.ProductName)</h4>
+                    <p class="price"> $@Html.DisplayFor(modelItem => b.UnitPrice)</p>
+                    <p class="quantity"> Available Quantity:@Html.DisplayFor(modelItem => b.Quantity)</p>
+                    <p class="body">
+                        @Html.DisplayFor(modelItem => b.LongDescription)<br />
+                    </p>
+                    <p><a href="/Home/ViewProductDetails/@Html.DisplayFor(modelItem => b.ProductId)"><button>View Product</button></a></p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <img class="image" src=@Url.Content(c.ProductPicture) style="width:100%">
+                    <h4>@Html.DisplayFor(modelItem => c.ProductName)</h4>
+                    <p class="price"> $@Html.DisplayFor(modelItem => c.UnitPrice)</p>
+                    <p class="quantity"> Available Quantity:@Html.DisplayFor(modelItem => c.Quantity)</p>
+                    <p class="body">
+                        @Html.DisplayFor(modelItem => c.LongDescription)<br />
+                    </p>
+                    <p><a href="/Home/ViewProductDetails/@Html.DisplayFor(modelItem => c.ProductId)"><button>View Product</button></a></p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

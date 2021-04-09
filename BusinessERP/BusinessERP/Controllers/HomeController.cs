@@ -55,6 +55,12 @@ namespace BusinessERP.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public ActionResult ViewProduct(int id)
+        {
+            TempData["P"] = "You have to login first to view product details or purchase from our site. If you are not a member then register now!";
+            return RedirectToAction("Login","Home");
+        }
 
         [HttpPost]
         public ActionResult Registration(RegistrationRequest registration, string CPassword, HttpPostedFileBase image)

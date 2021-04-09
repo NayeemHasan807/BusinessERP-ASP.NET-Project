@@ -1,0 +1,79 @@
+﻿@model IEnumerable<BusinessERP.Models.CompanyProduct>
+
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Customer/_Layout.cshtml";
+}
+
+<h2>Cart</h2>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+@if (Model != null)
+{
+    if (Model.Count() > 0)
+    {
+        <table class="table table-striped table-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductPicture)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ShortDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UnitPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img src=@Url.Content(item.ProductPicture) alt="Avater" width="50" height="50" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShortDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        <a class="btn btn-success btn-sm" href="/Customer/EditQuantity/@item.ProductId">Edit Quantity</a>
+                        <a class="btn btn-danger btn-sm" href="/Customer/RemoveFromCart/@item.ProductId">Remove From Cart</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-primary" role="alert">
+            You havnt seleted any product yet. Go to our product page and choosee the product you are wishing for.
+        </div>
+    }
+
+}
+else
+{
+    <div class="alert alert-primary" role="alert">
+        You havnt seleted any product yet. Go to our product page and choosee the product you are wishing for.
+    </div>
+}
+
+<div>
+    <a style="width:100%" class="btn btn-dark" href="/Customer/Index">Back</a>
+</div>

@@ -2,16 +2,7 @@
     ViewBag.Title = "Login";
     Layout = "~/Views/Home/_Layout.cshtml";
 }
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
 <h1 align="center" style="color:red;">Login</h1>
-<br />
-<br />
 <br />
 <div align="center">
     <form method="post" action="/User/Login">
@@ -28,20 +19,19 @@
             <tr>
                 <td colspan="2">
                     <input class="button" type="submit" name="Login" value="Login" />
-                    <input class="button" type="reset" value="Reset" />
+                    <a href="/Home/Index"><input class="button" type="button" value="Back" /></a>
                 </td>
             </tr>
         </table>
-        <span style="color:red;background-color:white">
+        <br />
+        <div style="color:red;background-color:black;width:30.8%;">
             @TempData["Error"]
-        </span>
+            @TempData["P"]
+            @if (TempData["P"] != null)
+            {
+                <br />
+                <a href="/Home/Registration" style="color:cyan;">Go To Registration</a>
+            }
+        </div>
     </form>
 </div>
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
