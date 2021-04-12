@@ -16,5 +16,10 @@ namespace BusinessERP.Repositories
         {
             return context.CompanyProducts.Where(x => x.Quantity > 0 && x.Quantity<10).ToList();
         }
+        public List<CompanyProduct> GetAllSearchedByName(string name)
+        {
+            var list = context.CompanyProducts.Where(x => x.ProductName.Contains(name)).OrderBy(x => x.ProductName).ToList();
+            return list;
+        }
     }
 }

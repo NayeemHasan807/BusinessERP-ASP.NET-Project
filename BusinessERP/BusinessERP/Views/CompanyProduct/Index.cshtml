@@ -52,6 +52,11 @@
 
     </table>*@
 <br />
+<form method="post">
+    <i class="fas fa-search"><input type="text" id="searchkey" name="searchkey" placeholder="Search prodyct by name" value="@TempData["searchkey"]" /><input type="submit" value="Search" /></i>
+</form>
+<br />
+<br />
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 @{
     BusinessERP.Models.CompanyProduct a = null;

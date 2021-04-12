@@ -1,4 +1,5 @@
-﻿using BusinessERP.Repositories;
+﻿using BusinessERP.Models;
+using BusinessERP.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,22 @@ namespace BusinessERP.Controllers
             if (CheckIfCustomer())
             {
                 return View(comprodrepo.GetAll());
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
+        [HttpPost]
+        public ActionResult Index(FormCollection collection)
+        {
+            if (CheckIfCustomer())
+            {
+                if (collection["searchkey"] == null)
+                {
+                    TempData["searchkey"] = collection["searchkey"];
+                    return View(comprodrepo.GetAll());
+                }
+                TempData["searchkey"] = collection["searchkey"];
+                return View(comprodrepo.GetAllSearchedByName(collection["searchkey"]));
             }
             else
                 return RedirectToAction("Login", "Home");
