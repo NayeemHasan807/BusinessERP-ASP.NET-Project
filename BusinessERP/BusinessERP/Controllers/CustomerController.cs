@@ -13,6 +13,7 @@ namespace BusinessERP.Controllers
     {
         private CompanyProductRepository comprodrepo = new CompanyProductRepository();
         private CustomerRepository customerrepo = new CustomerRepository();
+        private NoticeRepository noticerepo = new NoticeRepository();
         private CustomerInvoiceRepository cusinvrepo = new CustomerInvoiceRepository();
         private CustomerLineItemRepository cuslirepo = new CustomerLineItemRepository();
         //Check function access of customer
@@ -195,6 +196,16 @@ namespace BusinessERP.Controllers
                     TempData["Checkout"] = customerrepo.CheckoutDetails();
                     return View(invoice);
                 }
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
+        [HttpGet]
+        public ActionResult ViewNotice()
+        {
+            if (CheckIfCustomer())
+            {
+                return View(noticerepo.GetAllForCustomer());
             }
             else
                 return RedirectToAction("Login", "Home");

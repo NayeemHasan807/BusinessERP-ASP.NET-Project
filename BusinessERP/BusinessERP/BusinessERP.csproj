@@ -384,6 +384,7 @@
     <Content Include="Views\Home\ContactWithSupportForUnblock.cshtml" />
     <Content Include="Views\Home\Conformation.cshtml" />
     <Content Include="Views\Admin\SalesReport.cshtml" />
+    <Content Include="Views\Customer\ViewNotice.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
