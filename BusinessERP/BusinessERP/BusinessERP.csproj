@@ -141,6 +141,7 @@
     <Content Include="Content\Images\Product\superman1.jpg" />
     <Content Include="Content\Images\Product\tlm1.jpg" />
     <Content Include="Content\Images\Product\vader1.jpg" />
+    <Content Include="Content\JS\Admin\SalesLineChart.js" />
     <Content Include="Content\JS\Admin\UserBarChart.js" />
     <Content Include="Content\JS\Support\RegistrationLogBarChart.js" />
     <Content Include="Content\ProfilePictures\1C6A1275.111.jpg" />
@@ -382,6 +383,7 @@
     <Content Include="Views\Customer\Conformation.cshtml" />
     <Content Include="Views\Home\ContactWithSupportForUnblock.cshtml" />
     <Content Include="Views\Home\Conformation.cshtml" />
+    <Content Include="Views\Admin\SalesReport.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

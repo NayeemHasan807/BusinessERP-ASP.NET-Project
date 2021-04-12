@@ -17,6 +17,7 @@ namespace BusinessERP.Controllers
         private UserRepository userrepo = new UserRepository();
         private NoticeRepository noticerepo = new NoticeRepository();
         private CompanyProductRepository comprodrepo = new CompanyProductRepository();
+        private CustomerInvoiceRepository cusinvrepo = new CustomerInvoiceRepository();
         //Check access to admin actions
         public bool CheckAccess()
         {
@@ -168,6 +169,45 @@ namespace BusinessERP.Controllers
                     value.Add(user.Count(x => x.UserType == item));
                 }
                 return Json(new{ category, value }, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
+        [HttpGet]
+        public ActionResult SalesReport()
+        {
+            if (CheckAccess())
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
+        [HttpPost]
+        public ActionResult SalesLineChart()
+        {
+            if (CheckAccess())
+            {
+                var customerinvoice = cusinvrepo.GetAll();
+                List<string> date = new List<string>();
+                var fetchdate = customerinvoice.Select(x => x.OrderDate).Distinct().OrderBy(y=>y.Date);
+                foreach(var item in fetchdate)
+                {
+                    var i = item.ToString("dd-MM-yyyy");
+                    date.Add(i);
+                }
+                List<double> sales = new List<double>();
+                foreach (var item in fetchdate)
+                {
+                    var info = customerinvoice.Where(x => x.OrderDate == item).ToList();
+                    double count = 0;
+                    foreach(var i in info)
+                    {
+                        count = count + i.TotalWithTax;
+                    }
+                    sales.Add(Math.Round(count));
+                }
+                return Json(new { date, sales }, JsonRequestBehavior.AllowGet);
             }
             else
                 return RedirectToAction("Login", "Home");
