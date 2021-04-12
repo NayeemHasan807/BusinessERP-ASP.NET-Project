@@ -1,0 +1,50 @@
+﻿@model BusinessERP.Models.RequestToSupport
+
+@{
+    ViewBag.Title = "SupportRequest";
+    Layout = "~/Views/Customer/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<link href="~/Content/CSS/Style.css" rel="stylesheet" />
+<style>
+    body {
+        width: 50%;
+        padding-left: 20rem;
+    }
+</style>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SupportRequest</title>
+</head>
+<body>
+    <h2 align="center">Request To Support</h2>
+    <br />
+    <form method="post">
+        Request Subject:<br />
+        <input type="text" name="RequestSubject" value="@if (Model != null) { @Model.RequestSubject}"/>
+        <br />
+        <div>
+            <span style="color:red;background-color:white">
+                @Html.ValidationMessageFor(model => model.RequestSubject, "", new { @class = "text-danger" })
+            </span>
+        </div>
+        Request Body:<br />
+        <textarea rows="5" cols="80" name="RequestBody"> @if (Model != null) { @Model.RequestBody}</textarea><br />
+        <div>
+            <span style="color:red;background-color:white">
+                @Html.ValidationMessageFor(model => model.RequestBody, "", new { @class = "text-danger" })
+            </span>
+        </div>
+        <input type="submit" value="Send">
+        <a href="/Customer/Index">
+            <button type="button">
+                Back
+            </button>
+        </a>
+        <div></div>
+    </form>
+</body>
+</html>
+

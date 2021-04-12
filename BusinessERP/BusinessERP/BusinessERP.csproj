@@ -385,6 +385,7 @@
     <Content Include="Views\Home\Conformation.cshtml" />
     <Content Include="Views\Admin\SalesReport.cshtml" />
     <Content Include="Views\Customer\ViewNotice.cshtml" />
+    <Content Include="Views\Customer\SupportRequest.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

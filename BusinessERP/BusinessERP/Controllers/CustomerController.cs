@@ -16,6 +16,7 @@ namespace BusinessERP.Controllers
         private NoticeRepository noticerepo = new NoticeRepository();
         private CustomerInvoiceRepository cusinvrepo = new CustomerInvoiceRepository();
         private CustomerLineItemRepository cuslirepo = new CustomerLineItemRepository();
+        private RequestToSupportRepository rtsrepo = new RequestToSupportRepository();
         //Check function access of customer
         public bool CheckIfCustomer()
         {
@@ -200,12 +201,43 @@ namespace BusinessERP.Controllers
             else
                 return RedirectToAction("Login", "Home");
         }
+        //Customer notice check
         [HttpGet]
         public ActionResult ViewNotice()
         {
             if (CheckIfCustomer())
             {
                 return View(noticerepo.GetAllForCustomer());
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
+        //Customer request for support
+        [HttpGet]
+        public ActionResult SupportRequest()
+        {
+            if (CheckIfCustomer())
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
+        [HttpPost]
+        public ActionResult SupportRequest(RequestToSupport request)
+        {
+            if (CheckIfCustomer())
+            {
+                if (ModelState.IsValid)
+                {
+                    request.SenderUserName = Session["UserName"].ToString();
+                    request.UserType = Session["UserType"].ToString();
+                    rtsrepo.Insert(request);
+                    TempData["Conformation"]="Your request is send to support. We will contact with you via mail within 24hours";
+                    return RedirectToAction("Index");
+                }
+                else
+                    return View(request);
             }
             else
                 return RedirectToAction("Login", "Home");
