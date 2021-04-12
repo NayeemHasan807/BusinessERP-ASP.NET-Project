@@ -242,5 +242,111 @@ namespace BusinessERP.Controllers
             else
                 return RedirectToAction("Login", "Home");
         }
+        //Customer reports
+        [HttpGet]
+        public ActionResult Report()
+        {
+            if (CheckIfCustomer())
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
+        [HttpGet]
+        public ActionResult ProductPerchesReport()
+        {
+            if (CheckIfCustomer())
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
+        [HttpGet]
+        public ActionResult ShoppingExpensesReport()
+        {
+            if (CheckIfCustomer())
+            {
+                return View();
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
+        [HttpPost]
+        public ActionResult ProductPerchesBarChart()
+        {
+            if (CheckIfCustomer())
+            {
+                var customerinvoice = cusinvrepo.GetAllByUserName(Session["UserName"].ToString());
+                List<ReportViewModel> view = new List<ReportViewModel>();
+                foreach (var item in customerinvoice)
+                {
+                    var lineItems = cuslirepo.GetByInvoiceId(item.InvoiceId);
+                    foreach(var items in lineItems)
+                    {
+                        var indevisualproduct = comprodrepo.GetById(items.ProductId);
+                        bool check = false;
+                        foreach(var item_s in view)
+                        {
+                            if (item_s.Product.ProductId == indevisualproduct.ProductId)
+                            {
+                                item_s.Count = item_s.Count + items.Quantity;
+                                check = true;
+                                break;
+                            }
+                            else
+                                continue;
+                        }
+                        if(check==false)
+                        {
+                            ReportViewModel newp = new ReportViewModel();
+                            newp.Product = indevisualproduct;
+                            newp.Count = items.Quantity;
+                            view.Add(newp);
+                        }
+                    }
+                }
+                List<string> ProductName = new List<string>();
+                List<int> PerchesQuantity = new List<int>();
+                foreach(var item in view)
+                {
+                    ProductName.Add(item.Product.ProductName);
+                    PerchesQuantity.Add(item.Count);
+                }
+                return Json(new { ProductName , PerchesQuantity }, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
+        [HttpPost]
+        public ActionResult ShoppingExpensesLineChart()
+        {
+            if (CheckIfCustomer())
+            {
+                var customerinvoice = cusinvrepo.GetAllByUserName(Session["UserName"].ToString());
+                List<string> date = new List<string>();
+                var fetchdate = customerinvoice.Select(x => x.OrderDate).Distinct().OrderBy(y => y.Date);
+                foreach (var item in fetchdate)
+                {
+                    var i = item.ToString("dd-MM-yyyy");
+                    date.Add(i);
+                }
+                List<double> sales = new List<double>();
+                foreach (var item in fetchdate)
+                {
+                    var info = customerinvoice.Where(x => x.OrderDate == item).ToList();
+                    double count = 0;
+                    foreach (var i in info)
+                    {
+                        count = count + i.TotalWithTax;
+                    }
+                    sales.Add(Math.Round(count));
+                }
+                return Json(new { date, sales }, JsonRequestBehavior.AllowGet);
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
     }
 }

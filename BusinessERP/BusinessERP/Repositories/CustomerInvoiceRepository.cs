@@ -8,5 +8,9 @@ namespace BusinessERP.Repositories
 {
     public class CustomerInvoiceRepository:Repository<CustomerInvoice>
     {
+        public List<CustomerInvoice> GetAllByUserName(string username)
+        {
+            return context.CustomerInvoices.Where(x => x.CustomerUserName == username).ToList();
+        }
     }
 }

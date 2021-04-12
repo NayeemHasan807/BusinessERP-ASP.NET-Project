@@ -1,4 +1,5 @@
 ﻿using BusinessERP.Models;
+using BusinessERP.Models.ViewModels;
 using BusinessERP.Repositories;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace BusinessERP.Controllers
 {
     public class CompanyProductController : BaseController
     {
+        private CustomerLineItemRepository cuslirepo = new CustomerLineItemRepository();
         private CompanyProductRepository comprodrepo = new CompanyProductRepository();
         public bool CheckIfAdmin()
         {
@@ -25,13 +27,42 @@ namespace BusinessERP.Controllers
             else
                 return false;
         }
-        
+        //To get all products
         [HttpGet]
         public ActionResult Index()
         {
             if (CheckIfCustomer())
             {
+                Session["Place"]= "Index";
                 return View(comprodrepo.GetAll());
+            }
+            else
+                return RedirectToAction("Login", "Home");
+        }
+        //To get best selling products
+        [HttpGet]
+        public ActionResult BestSelling()
+        {
+            if (CheckIfCustomer())
+            {
+                Session["Place"] = "BestSelling";
+                var lineItems = cuslirepo.GetAll();
+                var pid = lineItems.Select(x => x.ProductId).Distinct();
+                List<ReportViewModel> tpvm = new List<ReportViewModel>();
+                foreach (var item in pid)
+                {
+                    ReportViewModel index = new ReportViewModel();
+                    index.Product = comprodrepo.GetById(item);
+                    index.Count = lineItems.Where(x => x.ProductId == item).Count();
+                    tpvm.Add(index);
+                }
+                List<ReportViewModel> ntpvm = tpvm.OrderByDescending(x => x.Count).Take(5).ToList();
+                List<CompanyProduct> cproduct = new List<CompanyProduct>();
+                foreach(var item in ntpvm)
+                {
+                    cproduct.Add(item.Product);
+                }
+                return View(cproduct);
             }
             else
                 return RedirectToAction("Login", "Home");

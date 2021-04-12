@@ -143,6 +143,8 @@
     <Content Include="Content\Images\Product\vader1.jpg" />
     <Content Include="Content\JS\Admin\SalesLineChart.js" />
     <Content Include="Content\JS\Admin\UserBarChart.js" />
+    <Content Include="Content\JS\Customer\ProductPerchesBarChart.js" />
+    <Content Include="Content\JS\Customer\ShoppingExpensesLineChart.js" />
     <Content Include="Content\JS\Support\RegistrationLogBarChart.js" />
     <Content Include="Content\ProfilePictures\1C6A1275.111.jpg" />
     <Content Include="Global.asax" />
@@ -287,6 +289,7 @@
     <Compile Include="Models\ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="Models\ViewModels\CheckoutViewModel.cs" />
     <Compile Include="Models\ViewModels\ProfileViewModel.cs" />
+    <Compile Include="Models\ViewModels\ReportViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CompanyProductRepository.cs" />
     <Compile Include="Repositories\CustomerInvoiceRepository.cs" />
@@ -386,6 +389,10 @@
     <Content Include="Views\Admin\SalesReport.cshtml" />
     <Content Include="Views\Customer\ViewNotice.cshtml" />
     <Content Include="Views\Customer\SupportRequest.cshtml" />
+    <Content Include="Views\CompanyProduct\BestSelling.cshtml" />
+    <Content Include="Views\Customer\Report.cshtml" />
+    <Content Include="Views\Customer\ProductPerchesReport.cshtml" />
+    <Content Include="Views\Customer\ShoppingExpensesReport.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

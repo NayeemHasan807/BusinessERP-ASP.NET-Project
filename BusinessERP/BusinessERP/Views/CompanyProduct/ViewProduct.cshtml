@@ -38,11 +38,33 @@
                     <input type="hidden" name="ProductId" value="@Model.ProductId" />
                     <input type="text" name="Quantity" value="1" />
                     <input type="submit" name="AddToCart" value="Add To Cart" />
-                    <a href="/CompanyProduct/Index">
-                        <button type="button">
-                            Back
-                        </button>
-                    </a>
+                    @if (Session["Place"] != null)
+                    {
+                        if (Session["Place"].ToString() == "Index")
+                        {
+                            <a href="/CompanyProduct/Index">
+                                <button type="button">
+                                    Back
+                                </button>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/CompanyProduct/BestSelling">
+                                <button type="button">
+                                    Back
+                                </button>
+                            </a>
+                        }
+                    }
+                    else
+                    {
+                        <a href="/CompanyProduct/Index">
+                            <button type="button">
+                                Back
+                            </button>
+                        </a>
+                    }
                 </form>
             }
             @if (TempData["Error"] != null)
