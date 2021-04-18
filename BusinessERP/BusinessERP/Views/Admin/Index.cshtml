@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Admin Dashboard";
+    Layout = "~/Views/Admin/_Layout.cshtml";
+    var profile = TempData["Profile"] as BusinessERP.Models.Employee;
+    var stockout = ViewData["StockOut"] as IList<BusinessERP.Models.CompanyProduct>;
+    var lowstock = ViewData["LowStock"] as IList<BusinessERP.Models.CompanyProduct>;
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<br />
+<h2>Welcome</h2>
+<h3>@profile.EmployeeName</h3>
+<br />
+<img src=@Url.Content(@profile.ProfilePicture.ToString()) alt="Avater" width="150" height="150"/>
+<br />
+<br />
+<div class="container">
+    <br />
+    <div class="row">
+        <div class="col-sm">
+            <div class="card" style="width: 30rem;">
+                <div class="card-body" style="border:inherit">
+                    <h3 class="card-title">Stock Out Products (Quantity 0)</h3>
+                    @if ( stockout.Count() > 0)
+                    {
+                        <p class="card-text">
+                            Total stock out products count is @stockout.Count()
+                        </p>
+                        <a href="/CompanyProduct/StockOut" class="btn btn-dark">View Stock Out Products List</a>
+                    }
+                    else
+                    {
+                        <p class="card-text">
+                            No stock out products
+                        </p>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="card" style="width: 30rem;">
+                <div class="card-body" style="border:inherit;">
+                    <h3 class="card-title">Low Stock Products (less than 10)</h3>
+                    @if (lowstock.Count() > 0)
+                    {
+                        <p class="card-text">
+                            Total low stock products count is @lowstock.Count()
+                        </p>
+                        <a href="/CompanyProduct/LowStock" class="btn btn-dark">View Low Stock Products List</a>
+                    }
+                    else
+                    {
+                        <p class="card-text">
+                            No low stock products
+                        </p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

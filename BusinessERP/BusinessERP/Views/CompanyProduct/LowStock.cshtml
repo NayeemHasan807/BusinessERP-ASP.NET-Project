@@ -1,0 +1,58 @@
+﻿@model IEnumerable<BusinessERP.Models.CompanyProduct>
+
+@{
+    ViewBag.Title = "LowStock";
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+
+<h2>Low Stock Products</h2>
+
+<link href="~/Content/CSS/Style.css" rel="stylesheet" />
+<table style="background-color:silver" id="view">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductPicture)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShortDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src=@Url.Content(item.ProductPicture) alt="Avater" width="50" height="50" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShortDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+        </tr>
+    }
+
+</table>
+<div>
+    <a href="/Admin/Index">
+        <button type="button">
+            Back
+        </button>
+    </a>
+</div>

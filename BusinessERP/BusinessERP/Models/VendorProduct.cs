@@ -21,7 +21,7 @@ namespace BusinessERP.Models
         public double UnitPrice { get; set; }
         public int Quantity { get; set; }
         public string ProductPicture { get; set; }
-        public string VendorId { get; set; }
+        public int VendorId { get; set; }
     
         public virtual Vendor Vendor { get; set; }
     }

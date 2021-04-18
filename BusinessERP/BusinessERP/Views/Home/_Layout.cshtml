@@ -9,14 +9,17 @@
     <link rel="stylesheet" href="~/Content/CSS/Button.css" />
 </head>
 <body>
-    <div class="navbar">
+    <div id="navbar">
         <a href="/Home/Index">Home</a>
-        <a href="#news">Products</a>
+        <a href="/Home/Products">Products</a>
         <a href="/Home/About">About</a>
         <a href="/Home/Contact">Contact</a>
     </div>
     <div id="div">
         @RenderBody()
     </div>
+    <footer style="background-color:black">
+            <span style="color:white">&copy; @DateTime.Now.Year - My ASP.NET MVC Application Alpha Enterprice Ltd.</span>
+    </footer>
 </body>
 </html>

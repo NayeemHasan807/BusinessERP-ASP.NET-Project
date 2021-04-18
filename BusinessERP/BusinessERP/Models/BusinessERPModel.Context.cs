@@ -27,6 +27,7 @@ namespace BusinessERP.Models
     
         public virtual DbSet<CompanyInvoice> CompanyInvoices { get; set; }
         public virtual DbSet<CompanyLineItem> CompanyLineItems { get; set; }
+        public virtual DbSet<CompanyProductCategory> CompanyProductCategories { get; set; }
         public virtual DbSet<CompanyProduct> CompanyProducts { get; set; }
         public virtual DbSet<CustomerInvoice> CustomerInvoices { get; set; }
         public virtual DbSet<CustomerLineItem> CustomerLineItems { get; set; }
@@ -38,10 +39,12 @@ namespace BusinessERP.Models
         public virtual DbSet<Notice> Notices { get; set; }
         public virtual DbSet<RawMaterial> RawMaterials { get; set; }
         public virtual DbSet<RawMaterialUsesLog> RawMaterialUsesLogs { get; set; }
+        public virtual DbSet<RegistrationRequestLog> RegistrationRequestLogs { get; set; }
         public virtual DbSet<RegistrationRequest> RegistrationRequests { get; set; }
         public virtual DbSet<RequestToSupport> RequestToSupports { get; set; }
         public virtual DbSet<SupplierLog> SupplierLogs { get; set; }
         public virtual DbSet<SupplierSchedule> SupplierSchedules { get; set; }
+        public virtual DbSet<SupportLog> SupportLogs { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<VendorProduct> VendorProducts { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }

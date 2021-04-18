@@ -1,0 +1,70 @@
+﻿@model BusinessERP.Models.Notice
+
+@{
+    ViewBag.Title = "NoticeEdit";
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+
+<h2>Notice Edit</h2>
+
+<div style="background-color:black;">
+    <br />
+    <h4 style="color:red">Notice</h4>
+    <br />
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.NoticeId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ReceiverType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select name="ReceiverType">
+                    <option value="All" @if (Model.ReceiverType == "All") { var s = "selected"; @s ; }>All</option>
+                    <option value="Support" @if (Model.ReceiverType == "Support") { var s = "selected"; @s ; }>Support</option>
+                    <option value="Sales Manager" @if (Model.ReceiverType == "Sales Manager") { var s = "selected"; @s ; }>Sales Manager</option>
+                    <option value="Assets Manager" @if (Model.ReceiverType == "Assets Manager") { var s = "selected"; @s ; }>Assets Manager</option>
+                    <option value="Finance Manager" @if (Model.ReceiverType == "Finance Manager") { var s = "selected"; @s ; }>Finance Manager</option>
+                    <option value="Supplier" @if (Model.ReceiverType == "Supplier") { var s = "selected"; @s ; }>Supplier</option>
+                    <option value="Employee" @if (Model.ReceiverType == "Employee") { var s = "selected"; @s ; }>Employee</option>
+                    <option value="Customer" @if (Model.ReceiverType == "Customer") { var s = "selected"; @s ; }>Customer</option>
+                    <option value="Vendor" @if (Model.ReceiverType == "Vendor") { var s = "selected"; @s ; }>Vendor</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.ReceiverType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NoticeTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NoticeTitle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NoticeTitle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NoticeBody, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NoticeBody, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NoticeBody, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<a href="/Admin/NoticeDetails/@Model.NoticeId">
+    <button type="button">
+        Back
+    </button>
+</a>
+

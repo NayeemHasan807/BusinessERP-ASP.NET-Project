@@ -29,6 +29,14 @@
           <Property Name="UnitPrice" Type="float" Nullable="false" />
           <Property Name="Total" Type="float" Nullable="false" />
         </EntityType>
+        <EntityType Name="CompanyProductCategories">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Discriptions" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
         <EntityType Name="CompanyProducts">
           <Key>
             <PropertyRef Name="ProductId" />
@@ -40,7 +48,7 @@
           <Property Name="UnitPrice" Type="float" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="ProductPicture" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="ManufacturingDate" Type="date" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="CustomerInvoices">
           <Key>
@@ -151,6 +159,17 @@
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="ManufacturingCost" Type="float" Nullable="false" />
         </EntityType>
+        <EntityType Name="RegistrationRequestLog">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="SupportUserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="RegistrationRequests">
           <Key>
             <PropertyRef Name="RegistrationId" />
@@ -170,10 +189,10 @@
           <Key>
             <PropertyRef Name="RequestId" />
           </Key>
-          <Property Name="RequestId" Type="int" Nullable="false" />
+          <Property Name="RequestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RequestSubject" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="RequestBody" Type="varchar" MaxLength="500" Nullable="false" />
-          <Property Name="SenderUserName" Type="int" Nullable="false" />
+          <Property Name="SenderUserName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="UserType" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="SupplierLog">
@@ -182,8 +201,8 @@
           </Key>
           <Property Name="LogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
-          <Property Name="Time" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="Comment" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ScheduleId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="SupplierSchedules">
@@ -195,6 +214,18 @@
           <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="Time" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SupportLog">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RequestSubject" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="RequestBody" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SenderUserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="SupportUserName" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -217,13 +248,13 @@
           <Property Name="UnitPrice" Type="float" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="ProductPicture" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="VendorId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="VendorId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Vendors">
           <Key>
             <PropertyRef Name="VendorId" />
           </Key>
-          <Property Name="VendorId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="VendorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VendorName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
@@ -233,6 +264,18 @@
           <Property Name="ProfilePicture" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Status" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <Association Name="FK_CompanyProducts_CompanyProductCategories">
+          <End Role="CompanyProductCategories" Type="Self.CompanyProductCategories" Multiplicity="1" />
+          <End Role="CompanyProducts" Type="Self.CompanyProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyProductCategories">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="CompanyProducts">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Employees_JobCategories">
           <End Role="JobCategories" Type="Self.JobCategories" Multiplicity="1" />
           <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
@@ -284,6 +327,7 @@
         <EntityContainer Name="BusinessERPModelStoreContainer">
           <EntitySet Name="CompanyInvoices" EntityType="Self.CompanyInvoices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyLineItems" EntityType="Self.CompanyLineItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyProductCategories" EntityType="Self.CompanyProductCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyProducts" EntityType="Self.CompanyProducts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerInvoices" EntityType="Self.CustomerInvoices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerLineItems" EntityType="Self.CustomerLineItems" Schema="dbo" store:Type="Tables" />
@@ -295,13 +339,19 @@
           <EntitySet Name="Notices" EntityType="Self.Notices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RawMaterials" EntityType="Self.RawMaterials" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RawMaterialUsesLogs" EntityType="Self.RawMaterialUsesLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegistrationRequestLog" EntityType="Self.RegistrationRequestLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegistrationRequests" EntityType="Self.RegistrationRequests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RequestToSupports" EntityType="Self.RequestToSupports" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SupplierLog" EntityType="Self.SupplierLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SupplierSchedules" EntityType="Self.SupplierSchedules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupportLog" EntityType="Self.SupportLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VendorProducts" EntityType="Self.VendorProducts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vendors" EntityType="Self.Vendors" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CompanyProducts_CompanyProductCategories" Association="Self.FK_CompanyProducts_CompanyProductCategories">
+            <End Role="CompanyProductCategories" EntitySet="CompanyProductCategories" />
+            <End Role="CompanyProducts" EntitySet="CompanyProducts" />
+          </AssociationSet>
           <AssociationSet Name="FK_Employees_JobCategories" Association="Self.FK_Employees_JobCategories">
             <End Role="JobCategories" EntitySet="JobCategories" />
             <End Role="Employees" EntitySet="Employees" />
@@ -348,6 +398,15 @@
           <Property Name="UnitPrice" Type="Double" Nullable="false" />
           <Property Name="Total" Type="Double" Nullable="false" />
         </EntityType>
+        <EntityType Name="CompanyProductCategory">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Discriptions" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CompanyProducts" Relationship="Self.FK_CompanyProducts_CompanyProductCategories" FromRole="CompanyProductCategories" ToRole="CompanyProducts" />
+        </EntityType>
         <EntityType Name="CompanyProduct">
           <Key>
             <PropertyRef Name="ProductId" />
@@ -359,7 +418,8 @@
           <Property Name="UnitPrice" Type="Double" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="ProductPicture" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ManufacturingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CompanyProductCategory" Relationship="Self.FK_CompanyProducts_CompanyProductCategories" FromRole="CompanyProducts" ToRole="CompanyProductCategories" />
         </EntityType>
         <EntityType Name="CustomerInvoice">
           <Key>
@@ -474,6 +534,17 @@
           <Property Name="ManufacturingCost" Type="Double" Nullable="false" />
           <NavigationProperty Name="RawMaterial" Relationship="Self.FK_RawMaterialUsesLogs_RawMaterials" FromRole="RawMaterialUsesLogs" ToRole="RawMaterials" />
         </EntityType>
+        <EntityType Name="RegistrationRequestLog">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SupportUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
         <EntityType Name="RegistrationRequest">
           <Key>
             <PropertyRef Name="RegistrationId" />
@@ -493,10 +564,10 @@
           <Key>
             <PropertyRef Name="RequestId" />
           </Key>
-          <Property Name="RequestId" Type="Int32" Nullable="false" />
+          <Property Name="RequestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RequestSubject" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="RequestBody" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SenderUserName" Type="Int32" Nullable="false" />
+          <Property Name="SenderUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="SupplierLog">
@@ -505,8 +576,8 @@
           </Key>
           <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Time" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Comment" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Comment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ScheduleId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="SupplierSchedule" Relationship="Self.FK_SupplierLog_SupplierSchedules" FromRole="SupplierLog" ToRole="SupplierSchedules" />
         </EntityType>
@@ -520,6 +591,18 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="SupplierLogs" Relationship="Self.FK_SupplierLog_SupplierSchedules" FromRole="SupplierSchedules" ToRole="SupplierLog" />
+        </EntityType>
+        <EntityType Name="SupportLog">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestSubject" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RequestBody" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SenderUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SupportUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -542,14 +625,14 @@
           <Property Name="UnitPrice" Type="Double" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="ProductPicture" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="VendorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VendorId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Vendor" Relationship="Self.FK_VendorProducts_Vendors" FromRole="VendorProducts" ToRole="Vendors" />
         </EntityType>
         <EntityType Name="Vendor">
           <Key>
             <PropertyRef Name="VendorId" />
           </Key>
-          <Property Name="VendorId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VendorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="VendorName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
@@ -560,6 +643,18 @@
           <Property Name="Status" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="VendorProducts" Relationship="Self.FK_VendorProducts_Vendors" FromRole="Vendors" ToRole="VendorProducts" />
         </EntityType>
+        <Association Name="FK_CompanyProducts_CompanyProductCategories">
+          <End Role="CompanyProductCategories" Type="Self.CompanyProductCategory" Multiplicity="1" />
+          <End Role="CompanyProducts" Type="Self.CompanyProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyProductCategories">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="CompanyProducts">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Employees_JobCategories">
           <End Role="JobCategories" Type="Self.JobCategory" Multiplicity="1" />
           <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
@@ -611,6 +706,7 @@
         <EntityContainer Name="BusinessERPDbContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CompanyInvoices" EntityType="Self.CompanyInvoice" />
           <EntitySet Name="CompanyLineItems" EntityType="Self.CompanyLineItem" />
+          <EntitySet Name="CompanyProductCategories" EntityType="Self.CompanyProductCategory" />
           <EntitySet Name="CompanyProducts" EntityType="Self.CompanyProduct" />
           <EntitySet Name="CustomerInvoices" EntityType="Self.CustomerInvoice" />
           <EntitySet Name="CustomerLineItems" EntityType="Self.CustomerLineItem" />
@@ -622,13 +718,19 @@
           <EntitySet Name="Notices" EntityType="Self.Notice" />
           <EntitySet Name="RawMaterials" EntityType="Self.RawMaterial" />
           <EntitySet Name="RawMaterialUsesLogs" EntityType="Self.RawMaterialUsesLog" />
+          <EntitySet Name="RegistrationRequestLogs" EntityType="Self.RegistrationRequestLog" />
           <EntitySet Name="RegistrationRequests" EntityType="Self.RegistrationRequest" />
           <EntitySet Name="RequestToSupports" EntityType="Self.RequestToSupport" />
           <EntitySet Name="SupplierLogs" EntityType="Self.SupplierLog" />
           <EntitySet Name="SupplierSchedules" EntityType="Self.SupplierSchedule" />
+          <EntitySet Name="SupportLogs" EntityType="Self.SupportLog" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="VendorProducts" EntityType="Self.VendorProduct" />
           <EntitySet Name="Vendors" EntityType="Self.Vendor" />
+          <AssociationSet Name="FK_CompanyProducts_CompanyProductCategories" Association="Self.FK_CompanyProducts_CompanyProductCategories">
+            <End Role="CompanyProductCategories" EntitySet="CompanyProductCategories" />
+            <End Role="CompanyProducts" EntitySet="CompanyProducts" />
+          </AssociationSet>
           <AssociationSet Name="FK_Employees_JobCategories" Association="Self.FK_Employees_JobCategories">
             <End Role="JobCategories" EntitySet="JobCategories" />
             <End Role="Employees" EntitySet="Employees" />
@@ -678,6 +780,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CompanyProductCategories">
+            <EntityTypeMapping TypeName="BusinessERPModel.CompanyProductCategory">
+              <MappingFragment StoreEntitySet="CompanyProductCategories">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="Discriptions" ColumnName="Discriptions" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CompanyProducts">
             <EntityTypeMapping TypeName="BusinessERPModel.CompanyProduct">
               <MappingFragment StoreEntitySet="CompanyProducts">
@@ -688,7 +799,7 @@
                 <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="ProductPicture" ColumnName="ProductPicture" />
-                <ScalarProperty Name="ManufacturingDate" ColumnName="ManufacturingDate" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -811,6 +922,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="RegistrationRequestLogs">
+            <EntityTypeMapping TypeName="BusinessERPModel.RegistrationRequestLog">
+              <MappingFragment StoreEntitySet="RegistrationRequestLog">
+                <ScalarProperty Name="LogId" ColumnName="LogId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="SupportUserName" ColumnName="SupportUserName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="RegistrationRequests">
             <EntityTypeMapping TypeName="BusinessERPModel.RegistrationRequest">
               <MappingFragment StoreEntitySet="RegistrationRequests">
@@ -857,6 +980,19 @@
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Time" ColumnName="Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupportLogs">
+            <EntityTypeMapping TypeName="BusinessERPModel.SupportLog">
+              <MappingFragment StoreEntitySet="SupportLog">
+                <ScalarProperty Name="LogId" ColumnName="LogId" />
+                <ScalarProperty Name="RequestSubject" ColumnName="RequestSubject" />
+                <ScalarProperty Name="RequestBody" ColumnName="RequestBody" />
+                <ScalarProperty Name="SenderUserName" ColumnName="SenderUserName" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="SupportUserName" ColumnName="SupportUserName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

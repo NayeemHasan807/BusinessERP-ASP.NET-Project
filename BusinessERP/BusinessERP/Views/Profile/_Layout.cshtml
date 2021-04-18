@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/CSS/VerticalNavBarStyle.css" />
+    <link rel="stylesheet" href="~/Content/CSS/Style.css" />
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <nav id="sidebar">
+            <div class="title">
+                Alpha Enterprice LTD
+            </div>
+            <div class="subtitle">
+                @Session["UserType"].ToString()
+            </div>
+            <ul class="list-items">
+                <li>
+                    <a href="
+                       @if (@Session["UserType"].ToString() == "Admin")
+                       {
+                           string path = "/Admin/Index";
+                           @path;
+                       }
+                       else if(@Session["UserType"].ToString() == "Support")
+                       {
+                           string path = "/Support/Index";
+                           @path;
+                       }
+                       else if(@Session["UserType"].ToString() == "Customer")
+                       {
+                           string path = "/Customer/Index";
+                           @path;
+                       }
+                       "><i class="fas fa-arrow-left"></i>Back</a>
+                </li>
+                <li><a href="/Profile/Index"><i class="fas fa-user"></i>My Profile</a></li>
+                <li><a href="/Profile/UpdateProfile"><i class="fas fa-user-edit"></i>Edit Profile</a></li>
+                <li><a href="/Profile/ChangePassword"><i class="fas fa-user-lock"></i>Change Password</a></li>
+                
+                <li><a href="/Logout/Index"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div id="workspace">@RenderBody()</div>
+    <br>
+</body>
+</html>

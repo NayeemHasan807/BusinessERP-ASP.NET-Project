@@ -1,0 +1,39 @@
+﻿@model BusinessERP.Models.EmployeeText
+
+@{
+    ViewBag.Title = "Reply";
+    Layout = "~/Views/EmployeeText/_Layout.cshtml";
+}
+
+<h2>Reply To Text</h2>
+<br />
+<form method="post">
+    <input type="hidden" name="SenderUserName" value="@Session["UserName"].ToString()" />
+    <input type="hidden" name="ReceiverUserName" value="@TempData["sun"]" />
+    Receiver:<br />
+    <input type="text" name="Receiver" value="@TempData["sun"]" disabled /><br />
+    <br />
+    <div>
+        <span style="color:red;background-color:white">
+            @TempData["Error"]
+            @Html.ValidationMessageFor(model => model.ReceiverUserName, "", new { @class = "text-danger" })
+        </span>
+    </div>
+    <br />
+    Text:<br />
+    <textarea rows="5" cols="80" name="TextBody">@TempData["TextBody"]</textarea><br />
+    <div>
+        <span style="color:red;background-color:white">
+            @Html.ValidationMessageFor(model => model.TextBody, "", new { @class = "text-danger" })
+        </span>
+    </div>
+    <input type="submit" value="Send" />
+    <input type="reset" />
+    <a href="/EmployeeText/Index">
+        <button type="button">
+            Back
+        </button>
+    </a>
+    <div></div>
+</form>
+

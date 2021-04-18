@@ -17,7 +17,7 @@ namespace BusinessERP.Models
         public int RequestId { get; set; }
         public string RequestSubject { get; set; }
         public string RequestBody { get; set; }
-        public int SenderUserName { get; set; }
+        public string SenderUserName { get; set; }
         public string UserType { get; set; }
     }
 }

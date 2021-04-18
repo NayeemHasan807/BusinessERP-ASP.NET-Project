@@ -1,5 +1,7 @@
 ﻿#div {
     border: 1px solid black;
+    width: auto;
+    height: auto;
     padding: 25px;
     background: url('../../Content/Images/Home/view1.jpg');
     background-repeat: no-repeat;

@@ -1,0 +1,79 @@
+﻿@model BusinessERP.Models.CompanyProduct
+
+@{
+    ViewBag.Title = "ViewProduct";
+    Layout = "~/Views/Customer/_Layout.cshtml";
+}
+<link href="~/Content/CSS/ProductDetailsView.css" rel="stylesheet" />
+<div class="container">
+    <!-- Left Column / Image -->
+    <div class="left-column">
+        <img src=@Url.Content(Model.ProductPicture) style="border-radius:0%" />
+    </div>
+    <!-- Right Column -->
+    <div class="right-column" align="left">
+        <!-- Product Description -->
+        <div class="product-description">
+            <span>@Model.ProductName<br /></span>
+            <p>@Model.ShortDescription</p><br />
+            <p>@Model.LongDescription</p><br />
+            <p style="color:green">Available Quantity: @Model.Quantity</p>
+        </div>
+        <!-- Product Pricing -->
+        <div class="product-price">
+            <span><p style="color:red">$@Model.UnitPrice</p></span>
+            @if (Model.Quantity == 0)
+            {
+                <p style="color:red">This product is currently not available!</p><br />
+                <a href="/CompanyProduct/Index">
+                    <button type="button">
+                        Back
+                    </button>
+                </a>
+            }
+            else
+            {
+                <p>Quantity:</p>
+                <form method="post" action="/Customer/AddToCart">
+                    <input type="hidden" name="ProductId" value="@Model.ProductId" />
+                    <input type="text" name="Quantity" value="1" />
+                    <input type="submit" name="AddToCart" value="Add To Cart" />
+                    @if (Session["Place"] != null)
+                    {
+                        if (Session["Place"].ToString() == "Index")
+                        {
+                            <a href="/CompanyProduct/Index">
+                                <button type="button">
+                                    Back
+                                </button>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="/CompanyProduct/BestSelling">
+                                <button type="button">
+                                    Back
+                                </button>
+                            </a>
+                        }
+                    }
+                    else
+                    {
+                        <a href="/CompanyProduct/Index">
+                            <button type="button">
+                                Back
+                            </button>
+                        </a>
+                    }
+                </form>
+            }
+            @if (TempData["Error"] != null)
+            {
+                <link href="~/Content/CSS/Alert.css" rel="stylesheet" />
+                <div class="alert alert-danger" role="alert">
+                    @TempData["Error"]
+                </div>
+            }
+        </div>
+    </div>
+</div>

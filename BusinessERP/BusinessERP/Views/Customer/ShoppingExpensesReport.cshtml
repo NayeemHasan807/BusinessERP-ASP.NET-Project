@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "ShoppingExpensesReport";
+    Layout = "~/Views/Customer/_Layout.cshtml";
+}
+
+<h2 style="position:center"> Shopping Expenses Statistics With Line Diagram </h2>
+<div id="test"></div>
+<canvas id="myChart" width="400" height="150"></canvas>
+<script src="~/Scripts/Chart.min.js"></script>
+<script src="~/Scripts/jquery-3.5.1.js"></script>
+<script src="~/Content/JS/Customer/ShoppingExpensesLineChart.js"></script>
+<br />
+<h4 style="position:center"> Fig : Shopping Expenses Using Line Diagram [Only decimal value is taken]</h4>
+<br />
+<div>
+    <a href="/Customer/Report">
+        <button type="button">
+            Back
+        </button>
+    </a>
+</div>

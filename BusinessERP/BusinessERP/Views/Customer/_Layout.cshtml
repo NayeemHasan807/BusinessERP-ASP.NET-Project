@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/CSS/ProductListView.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/CSS/VerticalNavBarStyle.css" />
+    <link rel="stylesheet" href="~/Content/CSS/Style.css" />
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <nav id="sidebar">
+            <div class="title">
+                Alpha Enterprice LTD
+            </div>
+            <div class="subtitle">
+                @Session["UserType"].ToString()
+            </div>
+            @*Customer*@
+        <ul class="list-items">
+            <li><a href="/Customer/Index"><i class="fas fa-home"></i>Dashboard</a></li>
+            <li><a href="/Customer/ViewNotice"><i class="fas fa-bell"></i>Notices</a></li>
+            <li><a href="/CompanyProduct/Index"><i class="fas fa-store"></i>All Products</a></li>
+            <li><a href="/CompanyProduct/BestSelling"><i class="fas fa-store"></i>Best Selling Products</a></li>
+            <li><a href="/Customer/ViewCart"><i class="fas fa-shopping-cart"></i>Cart</a></li>
+            <li><a href="/Customer/Checkout"><i class="fas fa-shopping-bag"></i>Checkout</a></li>
+            <li><a href="/Customer/Report"><i class="fas fa-file-pdf"></i>Report</a></li>
+            <li><a href="/Customer/SupportRequest"><i class="fas fa-users-cog"></i>Support Request</a></li>
+            @*<li><a href="/CustomerText/Index"><i class="fas fa-inbox"></i>Massages</a></li>*@
+            <li><a href="/Profile/Index"><i class="fas fa-user"></i>Profile</a></li>
+            <li><a href="/Logout/Index"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+        </ul>
+        </nav>
+    </div>
+    <div id="workspace">@RenderBody()</div>
+    <br>
+</body>
+</html>

@@ -1,0 +1,23 @@
+﻿@model BusinessERP.Models.Customer
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Customer/_Layout.cshtml";
+}
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/CSS/Alert.css" rel="stylesheet" />
+<br />
+<h2>Welcome</h2>
+<h3>@Model.CustomerName</h3>
+<br />
+<img src=@Url.Content(Model.ProfilePicture.ToString()) alt="Avater" width="150" height="150" />
+<br />
+<br />
+@if(@TempData["Conformation"]!=null)
+{
+    <div class="alert alert-primary" role="alert">
+        @TempData["Conformation"]
+    </div>
+}
+
+

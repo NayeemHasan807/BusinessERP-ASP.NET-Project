@@ -12,5 +12,10 @@ namespace BusinessERP.Repositories
         {
             return context.Users.Where(x => x.UserName == username).FirstOrDefault();
         }
+        public void DeleteByUsername(string username)
+        {
+            context.Users.Remove(GetByUserName(username));
+            context.SaveChanges();
+        }
     }
 }

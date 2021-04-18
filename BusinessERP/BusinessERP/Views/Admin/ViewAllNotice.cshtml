@@ -1,0 +1,44 @@
+﻿@model IEnumerable<BusinessERP.Models.Notice>
+
+@{
+    ViewBag.Title = "ViewAllNotice";
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+
+<h2>All Notice</h2>
+<br />
+<table id="view">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NoticeTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReceiverType)
+        </th>
+        <th>Operation</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoticeTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReceiverType)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "NoticeEdit", new { id = item.NoticeId }) |
+            @Html.ActionLink("Details", "NoticeDetails", new { id = item.NoticeId }) |
+            @Html.ActionLink("Delete", "NoticeDelete", new { id = item.NoticeId })
+        </td>
+    </tr>
+}
+
+</table>
+<div>
+    <a href="/Admin/Index">
+        <button type="button">
+            Back
+        </button>
+    </a>
+</div>

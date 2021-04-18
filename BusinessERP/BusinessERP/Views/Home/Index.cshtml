@@ -2,12 +2,7 @@
     ViewBag.Title = "Home";
     Layout = "~/Views/Home/_Layout.cshtml";
 }
-<br />
-<br />
-<br />
-<br />
 <h1 align="center" style="color:red;">Alpha Enterprice LTD.</h1>
-<br />
 <br />
 <div style="text-align:center">
     <span align="center" style="color:black;background-color:white;">
@@ -16,9 +11,6 @@
         We will buy you products If the qualities are good.
     </span>
 </div>
-<br />
-<br />
-<br />
 <br />
 <div align="center">
     <a href="/Home/Login">
@@ -29,10 +21,8 @@
     </a>
 </div>
 <br />
-<br />
-<br />
-<br />
-<br />
-<br />
-
-
+<div style="text-align:center">
+    <span align="center" style="color:black;background-color:white;">
+        @TempData["Confirmation"]
+    </span>
+</div>

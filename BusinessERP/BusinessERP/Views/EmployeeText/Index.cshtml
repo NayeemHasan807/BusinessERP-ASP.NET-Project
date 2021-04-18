@@ -1,0 +1,35 @@
+﻿@model IEnumerable<BusinessERP.Models.EmployeeText>
+
+@{
+    ViewBag.Title = "Inbox";
+    Layout = "~/Views/EmployeeText/_Layout.cshtml";
+}
+
+<h2>Inbox</h2>
+
+<table id="view">
+    <tr>
+        <th>
+            From
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TextBody)
+        </th>
+        <th>Action</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SenderUserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TextBody)
+        </td>
+        <td>
+            @Html.ActionLink("Reply", "Reply", new { sun=item.SenderUserName })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,88 @@
+﻿@model BusinessERP.Models.CustomerInvoice
+
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Customer/_Layout.cshtml";
+}
+
+<h2>Checkout</h2>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/CSS/Alert.css" rel="stylesheet" />
+@{var ck = TempData["Checkout"] as BusinessERP.Models.ViewModels.CheckoutViewModel; }
+@if (ck == null)
+{
+    <div class="alert alert-primary" role="alert">
+        You didn't selected any product to buy yet. Please go to our ptoduct section and find the product right for you.
+    </div>
+    <div>
+        <a style="width:100%" class="btn btn-dark" href="/Customer/Index">Back</a>
+    </div>
+}
+else
+{
+    <div>
+        <table class="table table-dark">
+            <tr>
+                <th>Ordered Item</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Price</th>
+            </tr>
+            @foreach (var item in ck.CartProductList)
+            {
+                <tr>
+                    <td align="center">@item.ProductName</td>
+                    <td align="center">@item.Quantity</td>
+                    <td align="center">$@item.UnitPrice</td>
+                    <td align="center">
+                        $
+                        @{
+                            var q = item.Quantity;
+                            var p = item.UnitPrice;
+                            var tp = q * p;
+                            @tp;}
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="3" align="center">Total Price</td>
+                <td align="center">$@ck.TotalPrice</td>
+            </tr>
+            <tr>
+                <td colspan="3" align="center">Total Price Including Tax</td>
+                <td align="center">$@ck.TotalPriceWithTax</td>
+            </tr>
+        </table>
+    </div>
+    <br />
+    <h2>Payment</h2>
+    <div>
+        <form method="post">
+            <table class="table table-hover">
+                <tr>
+                    <td width="20%" align="left">Credit Card Type</td>
+                    <td align="left">
+                        <input type="radio" name="CreditCardType" value="Visa" @if (Model != null) { if (Model.CreditCardType == "Visa") { var s = "checked"; @s;} }/><img style="border-radius:0%" src="~/Content/Images/Payments/visa.png" width="60" height="50" />
+                        <input type="radio" name="CreditCardType" value="MasterCard" @if (Model != null) { if (Model.CreditCardType == "MasterCard") { var s = "checked"; @s;} }/><img style="border-radius:0%" src="~/Content/Images/Payments/mastercard.png" width="60" height="50" />
+                        <input type="radio" name="CreditCardType" value="Paypal" @if (Model != null) { if (Model.CreditCardType == "Paypal") { var s = "checked"; @s;} }/><img style="border-radius:0%" src="~/Content/Images/Payments/paypal.png" width="80" height="50" />
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.CreditCardType, "", new { @class = "text-danger" })</td>
+                </tr>
+                <tr>
+                    <td align="left">Card Number</td>
+                    <td width="40%" align="left">
+                        <input type="number" name="CardNumber" value="@if (Model != null) { @Model.CardNumber }"/>
+                    </td>
+                    <td>@Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })</td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <input type="hidden" name="OrderDate" value="@DateTime.Now.ToString("dd-MM-yyyy")"/>
+                        <input style="width:100%" class="btn btn-dark" type="submit" value="Confirm Payment" />
+                        <a href="/Customer/Index"><button>Back</button></a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+}

@@ -1,0 +1,74 @@
+﻿@model IEnumerable<BusinessERP.Models.RegistrationRequest>
+
+@{
+    ViewBag.Title = "ViewRegistrationRequest";
+    Layout = "~/Views/Support/_Layout.cshtml";
+}
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<h2>Registration Requests</h2>
+<br />
+<div>
+    <table class="table" id="view">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProfilePicture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserType)
+            </th>
+            <th>Action</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @item.DateOfBirth.ToString("yyyy-MM-dd")
+                </td>
+                <td>
+                    <img src=@Url.Content(item.ProfilePicture) alt="Avater" width="50" height="50" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserType)
+                </td>
+                <td>
+                    <a href="/Support/RRApprove/@item.RegistrationId" class="btn btn-success">Approve</a>
+                    <a href="/Support/RRDetails/@item.RegistrationId" class="btn btn-info">Details</a>
+                    <a href="/Support/RRReject/@item.RegistrationId" class="btn btn-danger">Reject</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<a href="/Support/Index">
+    <button type="button">
+        Back
+    </button>
+</a>

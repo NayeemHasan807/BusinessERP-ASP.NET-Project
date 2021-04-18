@@ -100,22 +100,18 @@
   margin-left: 0px;
 }
 #workspace{
-  top: absolute;
+  top: 10px;
   left: 280px;
   right: 10px;
-  bottom: 10px absolute;
+  bottom: 10px auto;
   position: absolute;
   color: #202020;
   z-index: -1;
   text-align: center;
-  border: 1px solid #383838;
+  border: 0px solid #383838;
 }
 #workspace .header{
   font-size: 30px;
-  font-weight: 600;
-}
-#workspace p{
-  font-size: 20px;
   font-weight: 600;
 }
 #workspace h1{
@@ -130,3 +126,7 @@
   font-size: 50px;
   font-weight: 700;
 }
+/*#workspace p {
+    font-size: 20px;
+    font-weight: 600;
+}*/

@@ -20,7 +20,7 @@ namespace BusinessERP.Models
             this.VendorProducts = new HashSet<VendorProduct>();
         }
     
-        public string VendorId { get; set; }
+        public int VendorId { get; set; }
         public string VendorName { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }

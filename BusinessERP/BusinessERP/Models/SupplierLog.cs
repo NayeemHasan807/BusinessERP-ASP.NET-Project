@@ -16,7 +16,7 @@ namespace BusinessERP.Models
     {
         public int LogId { get; set; }
         public System.DateTime Date { get; set; }
-        public string Time { get; set; }
+        public System.TimeSpan Time { get; set; }
         public string Comment { get; set; }
         public int ScheduleId { get; set; }
     

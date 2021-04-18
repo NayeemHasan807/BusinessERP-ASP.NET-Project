@@ -1,0 +1,56 @@
+﻿@model BusinessERP.Models.Notice
+
+@{
+    ViewBag.Title = "NoticeDelete";
+    Layout = "~/Views/Admin/_Layout.cshtml";
+}
+
+<h2>Notice Delete</h2>
+<br />
+<div style="background-color:black;">
+    <br />
+    <h3 style="color:red">Are you sure you want to delete this?</h3>
+    <h4 style="color:red">Notice</h4>
+    <br />
+</div>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NoticeTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoticeTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoticeBody)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoticeBody)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceiverType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReceiverType)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default" />
+        <a href="/Admin/ViewAllNotice">
+             <button type="button">
+                Back
+             </button>
+        </a>
+    </div>
+    }
+</div>

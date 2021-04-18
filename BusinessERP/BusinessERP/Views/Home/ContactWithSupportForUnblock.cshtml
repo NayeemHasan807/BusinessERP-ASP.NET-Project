@@ -1,0 +1,48 @@
+﻿@model BusinessERP.Models.RequestToSupport
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<link href="~/Content/CSS/Style.css" rel="stylesheet" />
+<style>
+    body{
+        width:50%;
+        padding-left:20rem;
+    }
+</style>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ContactWithSupportForUnblock</title>
+</head>
+<body>
+<h2 align="center">Contact With Support For Unblock Account</h2>
+<br />
+<form method="post">
+    Request Subject:<br />
+    <input type="text" name="RequestSubject" value="Request to check my problem and unblock my account" readonly />
+    <br />
+    <div>
+        <span style="color:red;background-color:white">
+            @Html.ValidationMessageFor(model => model.RequestSubject, "", new { @class = "text-danger" })
+        </span>
+    </div>
+    Request Body:<br />
+    <textarea rows="5" cols="80" name="RequestBody">@TempData["RequestBody"]</textarea><br />
+    <div>
+        <span style="color:red;background-color:white">
+            @Html.ValidationMessageFor(model => model.RequestBody, "", new { @class = "text-danger" })
+        </span>
+    </div>
+    <input type="submit" value="Send">
+    <a href="/Home/Index">
+        <button type="button">
+            Back
+        </button>
+    </a>
+    <div></div>
+</form>
+</body>
+</html>
